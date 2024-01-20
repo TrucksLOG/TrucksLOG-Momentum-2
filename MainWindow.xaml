@@ -6,6 +6,7 @@
         xmlns:vm="clr-namespace:TrucksLOG.ViewModel"
         xmlns:Menu="clr-namespace:TrucksLOG.Utilities"
         xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:properties="clr-namespace:TrucksLOG.Properties"
         mc:Ignorable="d"
         Title="MainWindow"
         Height="600"
@@ -16,7 +17,8 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         Background="Transparent"
-        ResizeMode="CanResizeWithGrip">
+        ResizeMode="CanResizeWithGrip"
+        Loaded="Window_Loaded">
 
     <Window.DataContext>
         <vm:NavigationVM />

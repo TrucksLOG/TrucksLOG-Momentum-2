@@ -23,6 +23,7 @@
     <None Remove="Images\ATS_LOGO.png" />
     <None Remove="Images\Entwurf_02.3.1.png" />
     <None Remove="Images\ETS2_LOGO.png" />
+    <None Remove="Images\Icon.ico" />
     <None Remove="Images\icons8-einstellungen-50.png" />
     <None Remove="Images\img_customer.png" />
     <None Remove="Images\img_home.png" />
@@ -55,6 +56,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\ETS2_LOGO.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\icons8-einstellungen-50.png">
@@ -97,6 +101,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autoupdater.NET.Official" Version="1.8.4" />
     <PackageReference Include="DiscordRichPresence" Version="1.2.1.24" />
     <PackageReference Include="GameFinder.Common" Version="4.1.0" />
     <PackageReference Include="GameFinder.RegistryUtils" Version="4.1.0" />
@@ -108,7 +113,7 @@
     <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="4.11.0" />
     <PackageReference Include="MahApps.Metro.IconPacks.PicolIcons" Version="4.11.0" />
     <PackageReference Include="MahApps.Metro.IconPacks.RemixIcon" Version="4.11.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
     <PackageReference Include="MySql.Data" Version="8.3.0" />
     <PackageReference Include="NLog" Version="5.2.8" />
     <PackageReference Include="PropertyTools.Wpf" Version="3.1.0" />

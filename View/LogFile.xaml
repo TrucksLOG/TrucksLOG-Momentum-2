@@ -28,8 +28,13 @@
                     </StackPanel>
                 </Button>
             </StackPanel>
-
-            <TextBlock Name="Content_Viewer" TextWrapping="Wrap" Foreground="AliceBlue"/>
+            <ScrollViewer Height="Auto"  
+              MaxHeight="500"
+              Width="Auto" 
+              HorizontalScrollBarVisibility="Disabled"
+              VerticalScrollBarVisibility="Auto">
+                <TextBlock Name="Content_Viewer" TextWrapping="Wrap" Foreground="AliceBlue"/>
+            </ScrollViewer>
         </StackPanel>
 
     </Grid>

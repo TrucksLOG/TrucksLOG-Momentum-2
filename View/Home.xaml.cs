@@ -16,6 +16,7 @@ namespace TrucksLOG.View
 
         public bool InvokeRequired { get; private set; }
         private readonly TruckDaten TruckDaten = new();
+        public static readonly IniFile MyIni = new IniFile(@"Settings.ini");
 
         public Home()
         {
@@ -35,6 +36,15 @@ namespace TrucksLOG.View
             Telemetry.RefuelEnd += TelemetryRefuelEnd;
             this.DataContext = TruckDaten;
 
+            if (MyIni.KeyExists("STEAM_ID", "USER") && long.Parse(MyIni.Read("STEAM_ID", "USER")) > 10)
+            {
+                DASHBOARD_STACK.Visibility = Visibility.Visible;
+                NO_STEAM_STACK.Visibility= Visibility.Collapsed;
+            } else
+            {
+                DASHBOARD_STACK.Visibility = Visibility.Collapsed;
+                NO_STEAM_STACK.Visibility = Visibility.Visible;
+            }
         }
 
         private void Telemetry_Data(SCSTelemetry data, bool updated)
@@ -98,6 +108,10 @@ namespace TrucksLOG.View
         private void TelemetryTrain(object sender, EventArgs e) =>
             MessageBox.Show("Train");
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Content = new Login();
+        }
     }
     
 

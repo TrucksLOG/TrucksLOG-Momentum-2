@@ -17,7 +17,7 @@ namespace TrucksLOG.Utilities
             private string lkw_modell;
             private string lkw_modell_id;
             private bool cargo_loaded;
-            private int speed = 123;
+            private int speed = 999;
             private bool trailer_attached;
             private bool trailer_angehangen;
             private double tankvolumen;

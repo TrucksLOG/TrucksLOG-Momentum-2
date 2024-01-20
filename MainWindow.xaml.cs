@@ -3,13 +3,9 @@ using DiscordRPC;
 using DiscordRPC.Logging;
 using NLog;
 using System;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Threading;
 using TrucksLOG.Utilities;
 
 namespace TrucksLOG
@@ -18,7 +14,7 @@ namespace TrucksLOG
     {
         public DiscordRpcClient client;
         public static readonly IniFile MyIni = new IniFile(@"Settings.ini");
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        public static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         public MainWindow()
         {
@@ -26,7 +22,12 @@ namespace TrucksLOG
 
             if (!Directory.Exists(Environment.SpecialFolder.CommonDocuments + @"\TrucksLOG"))
                 Directory.CreateDirectory(Environment.SpecialFolder.CommonDocuments + @"\TrucksLOG");
-           
+
+
+            var d = DateTime.Now;
+            string FileName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\TrucksLOG\Log_" + d.Day.ToString("00") + "_" + d.Month.ToString("00") + "_" + d.Year.ToString() + ".txt";
+            File.WriteAllText(FileName, string.Empty);
+
 
             Logger.Info("App wurde gestartet!");
 
@@ -51,7 +52,7 @@ namespace TrucksLOG
             client.SetPresence(new RichPresence()
             {
                 Details = "TrucksLOG Momentum",
-                State =  Utilities.Config.APP_Version() +  "Work in Progress...",
+                State = Config.APP_Version() +  "Work in Progress...",
                 Assets = new Assets()
                 {
                     LargeImageKey = "",
@@ -82,26 +83,15 @@ namespace TrucksLOG
            
         }
 
-        public static void GOTO_URL(string path)
-        {
-            new Process
-            {
-                StartInfo = new ProcessStartInfo(path)
-                {
-                    UseShellExecute = true
-                }
-            }.Start();
-        }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            AutoUpdater.UpdateFormSize = new System.Drawing.Size(1000, 1200);
-            AutoUpdater.Mandatory = true;
-            AutoUpdater.ReportErrors = false;
-            AutoUpdater.Icon = Properties.Resources.Thommy_64_64;
-            AutoUpdater.UpdateMode = Mode.Normal;
-            AutoUpdater.RunUpdateAsAdmin = true;
-            AutoUpdater.Start("https://api.truckslog.de/MOMENTUM/update_version.xml");
+            Update.CLIENT_UPDATE();
+
+            if (MyIni.KeyExists("STEAM_ID", "USER") && ulong.Parse(MyIni.Read("STEAM_ID", "USER")) > 10)
+            {
+                REST.LOAD_USERDATA(ulong.Parse(MyIni.Read("STEAM_ID", "USER")));
+            }
         }
     }
 }

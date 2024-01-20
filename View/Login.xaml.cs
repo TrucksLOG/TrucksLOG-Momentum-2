@@ -1,4 +1,5 @@
-﻿using SteamUserInfo;
+﻿using NLog;
+using SteamUserInfo;
 using System.Windows;
 using System.Windows.Controls;
 using TrucksLOG.Utilities;
@@ -9,6 +10,8 @@ namespace TrucksLOG.View
     {
 
         public static readonly IniFile MyIni = new IniFile(@"Settings.ini");
+        public static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
 
         public Login()
         {
@@ -47,10 +50,11 @@ namespace TrucksLOG.View
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ulong STEAM = ulong.Parse(inp_steam_id.Text);
+            Logger.Info("LOGIN 1 STEAM-ID: " + STEAM.ToString() + ", INPUT: " + inp_steam_id.Text);
 
             if (STEAM > 10)
             {
-                if(REST.Load_Nickname(ulong.Parse(inp_steam_id.Text)))
+                if(REST.LOAD_USERDATA(ulong.Parse(inp_steam_id.Text)))
                 {
                     MyIni.Write("STEAM_ID", STEAM.ToString(), "USER");
                     this.Content = new Login2();

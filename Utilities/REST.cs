@@ -21,7 +21,7 @@ namespace TrucksLOG.Utilities
             return configuration.GetSection("github")["accessToken"];
         }
 
-        public static bool Load_Nickname(ulong STEAM_ID)
+        public static bool LOAD_USERDATA(ulong STEAM_ID)
         {
             try
             {
@@ -38,8 +38,9 @@ namespace TrucksLOG.Utilities
                         MyIni.Write("NICKNAME", json.nickname.ToString(), "USER");
                         MyIni.Write("SPEDITION", json.in_spedition.ToString(), "USER");
                         MyIni.Write("FREIGABE", json.freigabe.ToString(), "USER");
+                        MyIni.Write("BETA_TESTER", json.beta_tester.ToString(), "USER");
 
-                        Logger.Info("Found Data in REST!  Freigabe: " + json.freigabe + ", Nickname: " + json.nickname + ", VTC: " + json.in_spedition);
+                        Logger.Info("Found Data in REST!  Freigabe: " + json.freigabe + ", Nickname: " + json.nickname + ", VTC: " + json.in_spedition + ", BETA: " + json.beta_tester);
                         return true;
                     }
                     else

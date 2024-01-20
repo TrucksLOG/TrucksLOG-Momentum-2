@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 
@@ -24,6 +25,18 @@ namespace TrucksLOG.Utilities
             return Environment.SpecialFolder.MyDocuments + @"\TrucksLOG";
 
         }
+
+        public static void GOTO_URL(string path)
+        {
+            new Process
+            {
+                StartInfo = new ProcessStartInfo(path)
+                {
+                    UseShellExecute = true
+                }
+            }.Start();
+        }
+
 
 
     }

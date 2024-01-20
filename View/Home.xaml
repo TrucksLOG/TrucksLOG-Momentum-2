@@ -10,12 +10,23 @@
              d:DesignHeight="600"
              d:DesignWidth="622">
 
-
     <Grid Margin="10">
 
         <Border CornerRadius="0,20,20,0" Margin="0,5,5,0"/>
 
-        <StackPanel Orientation="Vertical">
+        <StackPanel x:Name="NO_STEAM_STACK" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Keine Steam-ID gefunden!" Foreground="YellowGreen" FontSize="24"/>
+            <Button Click="Button_Click" Style="{StaticResource BTN_SUCCESS}" Margin="0,20,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <icons:PackIconMaterial Kind="LockReset"/>
+                    <TextBlock Text="Setup neu Starten!" Margin="10,0,0,0"/>
+                </StackPanel>
+            </Button>
+            
+        </StackPanel>
+        
+        
+        <StackPanel Orientation="Vertical" x:Name="DASHBOARD_STACK">
             
             <Label Foreground="White" HorizontalAlignment="Center" FontSize="60" Content="{Binding SPEED}" Margin="0,30,0,0" FontFamily="{StaticResource GOOD_TIMES}"/>
 

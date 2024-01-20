@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Windows.Controls;
+using TrucksLOG.Utilities;
 
 namespace TrucksLOG.View
 {
@@ -12,7 +13,7 @@ namespace TrucksLOG.View
 
         private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            MainWindow.GOTO_URL("https://truckslog.de/?s=SYSTEM/impressum");
+            Config.GOTO_URL("https://truckslog.de/?s=SYSTEM/impressum");
         }
     }
      

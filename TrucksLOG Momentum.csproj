@@ -1,0 +1,206 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.17763.0</TargetFramework>
+    <RootNamespace>TrucksLOG</RootNamespace>
+    <Nullable>disable</Nullable>
+    <UseWPF>true</UseWPF>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Title>TrucksLOG Momentum</Title>
+    <PackageProjectUrl>https://truckslog.de</PackageProjectUrl>
+    <ApplicationIcon>1-52_icon-icons.com_60425.ico</ApplicationIcon>
+    <UserSecretsId>d90a6896-776b-41aa-84d7-2da787ec224d</UserSecretsId>
+    <Copyright>Blasius Thomas</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Fonts\GOOD TIMING BD.OTF" />
+    <None Remove="Fonts\ALLER_STD.TTF" />
+    <None Remove="Fonts\NIKODECS.OTF" />
+    <None Remove="Fonts\Rubik-Medium.ttf" />
+    <None Remove="Fonts\Rubik-Regular.ttf" />
+    <None Remove="Images\ATS_LOGO.png" />
+    <None Remove="Images\customer_page.png" />
+    <None Remove="Images\Entwurf_02.3.1.png" />
+    <None Remove="Images\ETS2_LOGO.png" />
+    <None Remove="Images\home_page.png" />
+    <None Remove="Images\icons8-einstellungen-50.png" />
+    <None Remove="Images\img_customer.png" />
+    <None Remove="Images\img_home.png" />
+    <None Remove="Images\img_order.png" />
+    <None Remove="Images\img_product.png" />
+    <None Remove="Images\img_setting.png" />
+    <None Remove="Images\img_shipment.png" />
+    <None Remove="Images\img_transaction.png" />
+    <None Remove="Images\order_page.png" />
+    <None Remove="Images\product_page.png" />
+    <None Remove="Images\schrift1.png" />
+    <None Remove="Images\setting_page.png" />
+    <None Remove="Images\shipment_page.png" />
+    <None Remove="Images\shutdown_def.png" />
+    <None Remove="Images\shutdown_mo.png" />
+    <None Remove="Images\TMP_LOGO.png" />
+    <None Remove="Images\transaction_page.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Fonts\GOOD TIMING BD.OTF" />
+    <Resource Include="Fonts\NIKODECS.OTF">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\Rubik-Medium.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\Rubik-Regular.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\ATS_LOGO.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Entwurf_02.3.1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\ETS2_LOGO.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\icons8-einstellungen-50.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\schrift1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\TMP_LOGO.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="1-52_icon-icons.com_60425.ico" />
+    <Content Include="Images\customer_page.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\home_page.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\img_customer.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\img_home.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\img_order.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\img_product.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\img_setting.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\img_shipment.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\img_transaction.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\order_page.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\product_page.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\setting_page.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\shipment_page.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\shutdown_def.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\shutdown_mo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\transaction_page.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DiscordRichPresence" Version="1.2.1.24" />
+    <PackageReference Include="GameFinder.Common" Version="4.1.0" />
+    <PackageReference Include="GameFinder.RegistryUtils" Version="4.1.0" />
+    <PackageReference Include="GameFinder.StoreHandlers.Steam" Version="4.1.0" />
+    <PackageReference Include="MahApps.Metro.IconPacks.BootstrapIcons" Version="4.11.0" />
+    <PackageReference Include="MahApps.Metro.IconPacks.BoxIcons" Version="4.11.0" />
+    <PackageReference Include="MahApps.Metro.IconPacks.FontAwesome" Version="4.11.0" />
+    <PackageReference Include="MahApps.Metro.IconPacks.ForkAwesome" Version="4.11.0" />
+    <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="4.11.0" />
+    <PackageReference Include="MahApps.Metro.IconPacks.PicolIcons" Version="4.11.0" />
+    <PackageReference Include="MahApps.Metro.IconPacks.RemixIcon" Version="4.11.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
+    <PackageReference Include="MySql.Data" Version="8.3.0" />
+    <PackageReference Include="NLog" Version="5.2.8" />
+    <PackageReference Include="PropertyTools.Wpf" Version="3.1.0" />
+    <PackageReference Include="RestSharp" Version="110.2.0" />
+    <PackageReference Include="SteamUserInfo" Version="1.0.0" />
+    <PackageReference Include="System.Runtime.WindowsRuntime.UI.Xaml" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="SCSSdkClient">
+      <HintPath>C:\Users\edvbl\OneDrive\Dokumente\TrucksLOG Daten\Telemetry 11-09-22\SCSSdkClient.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Update="View\Impressum.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Login5.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Login4.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Login3.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Login2.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Utilities\DataTemplate.xaml">
+      <CustomToolNamespace></CustomToolNamespace>
+    </Page>
+  </ItemGroup>
+
+</Project>

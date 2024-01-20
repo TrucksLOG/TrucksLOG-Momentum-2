@@ -1,0 +1,33 @@
+﻿<Application x:Class="TrucksLOG.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml">
+    
+    <Application.Resources>
+
+        <ResourceDictionary>
+
+            <FontFamily x:Key="FAST_FORWARD">pack://application:,,,/Fonts/#FAST-FORWARD</FontFamily>
+            <FontFamily x:Key="GOOD_TIMES">pack://application:,,,/Fonts/#GOOD TIMING</FontFamily>
+            <FontFamily x:Key="ALLER">pack://application:,,,/Fonts/#ALLER_STD</FontFamily>
+            <FontFamily x:Key="RUBIK">pack://application:,,,/Fonts/#Rubik-Medium</FontFamily>
+            <FontFamily x:Key="NICO">pack://application:,,,/Fonts/#NIKODECS</FontFamily>
+
+            
+            <ResourceDictionary.MergedDictionaries>
+
+                <ResourceDictionary Source="Styles/Page.xaml" />
+                <ResourceDictionary Source="Styles/Image.xaml" />
+                <ResourceDictionary Source="Styles/Text.xaml" />
+                <ResourceDictionary Source="Styles/Button.xaml" />
+                <ResourceDictionary Source="Styles/Input.xaml" />
+                <ResourceDictionary Source="Utilities/DataTemplate.xaml" />
+
+                
+            </ResourceDictionary.MergedDictionaries>
+           
+        </ResourceDictionary>
+
+    </Application.Resources>
+    
+</Application>

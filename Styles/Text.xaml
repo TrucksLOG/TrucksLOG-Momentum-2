@@ -1,0 +1,75 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+   
+
+    <Style x:Key="Text_Style" TargetType="TextBlock">
+
+        <Setter Property="FontFamily"
+                Value="/Fonts/#GOOD_TIMES" />
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
+        <Setter Property="HorizontalAlignment"
+                Value="Left" />
+        <Setter Property="Foreground"
+                Value="#DBDBDB" />
+        <Setter Property="FontSize"
+                Value="18" />
+        <Setter Property="Margin"
+                Value="70,0,0,0" />
+
+    </Style>
+
+
+    <Style x:Key="Text_Style_Settings" TargetType="TextBlock">
+
+        <Setter Property="FontFamily"
+                Value="/Fonts/#GOOD_TIMES" />
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
+        <Setter Property="HorizontalAlignment"
+                Value="Left" />
+        <Setter Property="Foreground"
+                Value="OrangeRed" />
+        <Setter Property="FontSize"
+                Value="18" />
+        <Setter Property="Margin"
+                Value="70,0,0,0" />
+
+    </Style>
+
+    <Style x:Key="Text_Style_Settings_LEFT" TargetType="TextBlock">
+
+        <Setter Property="FontFamily"
+                Value="/Fonts/#GOOD_TIMES" />
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
+        <Setter Property="HorizontalAlignment"
+                Value="Left" />
+        <Setter Property="Foreground"
+                Value="OrangeRed" />
+        <Setter Property="FontSize"
+                Value="18" />
+        <Setter Property="Margin"
+                Value="10,0,0,0" />
+
+    </Style>
+
+
+    <Style x:Key="UEBERSCHRIFT" TargetType="TextBlock">
+
+        <Setter Property="FontFamily"
+                Value="{StaticResource NICO}" />
+        <Setter Property="VerticalAlignment"
+                Value="Top" />
+        <Setter Property="HorizontalAlignment"
+                Value="Left" />
+        <Setter Property="Foreground"
+                Value="YellowGreen" />
+        <Setter Property="FontSize"
+                Value="36" />
+        <Setter Property="Margin"
+                Value="3" />
+
+    </Style>
+</ResourceDictionary>

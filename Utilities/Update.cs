@@ -11,15 +11,18 @@ namespace TrucksLOG.Utilities
 
         public static void CLIENT_UPDATE()
         {
-            AutoUpdater.Mandatory = true;
-            AutoUpdater.ReportErrors = false;
-            AutoUpdater.Icon = Properties.Resources.Thommy_64_64;
-            AutoUpdater.UpdateMode = Mode.Normal;
-            AutoUpdater.RunUpdateAsAdmin = true;
-            if(CHECK_BETA() != null)
+            if (MyIni.KeyExists("STEAM_ID", "USER"))
             {
-                Logger.Info("UPDATE_PATH: " + CHECK_BETA());
-                AutoUpdater.Start(CHECK_BETA());
+                AutoUpdater.Mandatory = true;
+                AutoUpdater.ReportErrors = false;
+                AutoUpdater.Icon = Properties.Resources.Thommy_64_64;
+                AutoUpdater.UpdateMode = Mode.Normal;
+                AutoUpdater.RunUpdateAsAdmin = true;
+                if (CHECK_BETA() != null)
+                {
+                    Logger.Info("UPDATE_PATH: " + CHECK_BETA());
+                    AutoUpdater.Start(CHECK_BETA());
+                }
             }
         }
 

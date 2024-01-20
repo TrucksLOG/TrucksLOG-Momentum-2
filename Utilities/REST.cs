@@ -14,7 +14,7 @@ namespace TrucksLOG.Utilities
         public static readonly IniFile MyIni = new IniFile(@"Settings.ini");
 
 
-        private static string GetAccessToken()
+        public static string GetAccessToken()
         {
             ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
             IConfiguration configuration = configurationBuilder.AddUserSecrets<Userdaten>().Build();
@@ -45,17 +45,17 @@ namespace TrucksLOG.Utilities
                     }
                     else
                     {
-                        Logger.Info("Keine Daten aus Load_Nickname erhalten!");
+                        Logger.Info("No Data returns from LOAD_USERDATA!");
                         return false;
                     }
                 } else
                 {
-                    Logger.Info("STEAM-ID ist kleiner als 10, demnach muss Sie falsch sein!");
+                    Logger.Info("STEAM-ID is smaller than 10, to low!");
                     return false;
                 }
             } catch (Exception ex)
             {
-                Logger.Error(ex.Message);
+                Logger.Error("ERROR @LOAD_USERDATEN: " + ex.Message);
                 return false;
             }
           
@@ -63,9 +63,6 @@ namespace TrucksLOG.Utilities
 
         class Userdaten
         {
-            private string nickname { get; set; }
-            private string eMail { get; set; }
-            private string SteamID { get; set; }
 
         }
     }

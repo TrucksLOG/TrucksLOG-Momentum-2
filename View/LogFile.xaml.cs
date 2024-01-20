@@ -39,6 +39,12 @@ namespace TrucksLOG.View
            
         }
 
+        public static void CLEAR_LOG()
+        {
+            var d = DateTime.Now;
+            string FileName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\TrucksLOG\Log_" + d.Day.ToString("00") + "_" + d.Month.ToString("00") + "_" + d.Year.ToString() + ".txt";
+            File.WriteAllText(FileName, string.Empty);
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

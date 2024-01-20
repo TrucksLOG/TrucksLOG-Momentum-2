@@ -20,16 +20,12 @@ namespace TrucksLOG
         {
             InitializeComponent();
 
-            if (!Directory.Exists(Environment.SpecialFolder.CommonDocuments + @"\TrucksLOG"))
-                Directory.CreateDirectory(Environment.SpecialFolder.CommonDocuments + @"\TrucksLOG");
+            if (!Directory.Exists(Environment.GetFolderPath( Environment.SpecialFolder.MyDocuments ) + @"\TrucksLOG"))
+                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\TrucksLOG");
 
 
-            var d = DateTime.Now;
-            string FileName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\TrucksLOG\Log_" + d.Day.ToString("00") + "_" + d.Month.ToString("00") + "_" + d.Year.ToString() + ".txt";
-            File.WriteAllText(FileName, string.Empty);
 
-
-            Logger.Info("App wurde gestartet!");
+            Logger.Info("App Version " + Config.APP_Version() + " wurde gestartet!");
 
             MyIni.Write("DOK_ROOT", Config.GET_DOKUMENT_ROOT());
 
@@ -86,10 +82,9 @@ namespace TrucksLOG
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Update.CLIENT_UPDATE();
-
             if (MyIni.KeyExists("STEAM_ID", "USER") && ulong.Parse(MyIni.Read("STEAM_ID", "USER")) > 10)
             {
+                Update.CLIENT_UPDATE();
                 REST.LOAD_USERDATA(ulong.Parse(MyIni.Read("STEAM_ID", "USER")));
             }
         }

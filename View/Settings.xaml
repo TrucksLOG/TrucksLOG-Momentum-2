@@ -12,12 +12,17 @@
     <UserControl.DataContext>
         <vm:SettingVM />
     </UserControl.DataContext>
-    
+
     <Grid Margin="15">
 
-        <Border CornerRadius="0,20,20,0">
-           
-        </Border>
+
+        <StackPanel Orientation="Horizontal" Margin="20,50,0,0" VerticalAlignment="Top">
+            <CheckBox>
+                <TextBlock>
+				Enable feature <Run Foreground="Green" FontWeight="Bold">ABC</Run>
+                </TextBlock>
+            </CheckBox>
+        </StackPanel>
 
         <TextBlock Text="Einstellungen" FontSize="24" Foreground="LightYellow"/>
         

@@ -12,6 +12,9 @@ namespace TrucksLOG.View
             InitializeComponent();
         }
 
-  
+        private void RibbonCheckBox_Checked(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
     }
 }

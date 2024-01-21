@@ -25,12 +25,12 @@
 
             <StackPanel Orientation="Horizontal">
                 <icons:PackIconForkAwesome Kind="Check" Width="35" Height="35" x:Name="CHECK_ICON" Foreground="LightGray" HorizontalAlignment="Left" Margin="0,5,10,0"/>
-                <Label x:Name="LBL_ETS_PATH" Content="Pfad zu Euro Truck Simulator 2:" FontSize="12" Foreground="{StaticResource TextBrush_Yellow}" FontFamily="{StaticResource NICO}"/>
+                <Label x:Name="LBL_ETS_PATH" Content="Pfad zu Euro Truck Simulator 2:" FontSize="12"  Foreground="Lime" FontFamily="{StaticResource NICO}"/>
             </StackPanel>
 
             
             <StackPanel Orientation="Horizontal">
-                <TextBox x:Name="inp_ets_path" Width="555" Style="{StaticResource placeHolder_ETS2}" FontFamily="{StaticResource NICO}"/>
+                <TextBox x:Name="inp_ets_path" Width="555" Style="{StaticResource placeHolder_ETS2}" FontFamily="{StaticResource NICO}" Foreground="Lime"/>
                 <Button Height="35" HorizontalAlignment="Left" Margin="0" Name="BrowseFileETS" Padding="1" Width="45" Click="BrowseFileETS_Click" Style="{StaticResource BTN_SEARCH}">
                     <icons:BootstrapIcons Kind="Search"/>
                 </Button>

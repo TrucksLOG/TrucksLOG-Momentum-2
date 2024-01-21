@@ -224,7 +224,7 @@
     <Style x:Key="BTN_SUCCESS" TargetType="{x:Type Button}">
 
         <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="Background" Value="GreenYellow"/>
+        <Setter Property="Background" Value="Lime"/>
         <Setter Property="Foreground" Value="Black"/>
 
         <Setter Property="Template">

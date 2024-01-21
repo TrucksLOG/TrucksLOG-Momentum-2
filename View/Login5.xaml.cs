@@ -1,10 +1,11 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using TrucksLOG.Utilities;
 
 namespace TrucksLOG.View
 {
-    public partial class Login5 : UserControl
+    public partial class Login5 : System.Windows.Controls.UserControl
     {
         public static readonly IniFile MyIni = new IniFile(@"Settings.ini");
 
@@ -23,7 +24,13 @@ namespace TrucksLOG.View
         {
             if(MyIni.KeyExists("LENKUNG", "USER"))
             {
-                this.Content = new Home();
+                if(System.Windows.Forms.MessageBox.Show("Zum Abschluss der Einrichtung muss der Client neu gestartet werden...", "Confirmation", MessageBoxButtons.OK) == DialogResult.OK)
+                {
+                    Config.RestartApp();
+                }
+            } else
+            {
+                System.Windows.Forms.MessageBox.Show("Du musst eine Auswahl treffen!");
             }
         }
 

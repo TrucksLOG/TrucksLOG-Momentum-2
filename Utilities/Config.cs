@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Diagnostics.Metrics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
+using System.Threading;
+using System.Windows;
 
 namespace TrucksLOG.Utilities
 {
@@ -19,10 +23,10 @@ namespace TrucksLOG.Utilities
 
         internal static string GET_DOKUMENT_ROOT()
         {
-            if(!Directory.Exists(Environment.SpecialFolder.MyDocuments + @"\TrucksLOG"))
-                Directory.CreateDirectory(Environment.SpecialFolder.MyDocuments + @"\TrucksLOG");
+            if(!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\TrucksLOG"))
+                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\TrucksLOG");
 
-            return Environment.SpecialFolder.MyDocuments + @"\TrucksLOG";
+            return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\TrucksLOG";
 
         }
 
@@ -37,7 +41,29 @@ namespace TrucksLOG.Utilities
             }.Start();
         }
 
+        internal static void RestartApp()
+        {
+            ProcessStartInfo Info = new ProcessStartInfo();
+            Info.Arguments = "/C choice /C Y /N /D Y /T 1 & START \"\" \"" + Assembly.GetEntryAssembly().Location + "\"";
+            Info.WindowStyle = ProcessWindowStyle.Hidden;
+            Info.CreateNoWindow = true;
+            Info.FileName = "TrucksLOG Momentum.exe";
+            Process.Start(Info);
+            Process.GetCurrentProcess().Kill();
+        }
 
+        public static int AlreadyRunning()
+        {
+            Process[] processCollection = Process.GetProcesses();
+            var anz = 0;
+            foreach (Process p in processCollection)
+            {
+                if (p.ProcessName == "TrucksLOG Momentum")
+                    anz++;
+            }
+            return anz;
 
+        }
+        
     }
 }

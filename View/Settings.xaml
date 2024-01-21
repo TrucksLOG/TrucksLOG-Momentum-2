@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:vm="clr-namespace:TrucksLOG.ViewModel"
+             xmlns:vm="clr-namespace:TrucksLOG.ViewModel" 
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d"
              d:DesignHeight="600"
              d:DesignWidth="622"
@@ -14,17 +16,43 @@
     </UserControl.DataContext>
 
     <Grid Margin="15">
+        <StackPanel Orientation="Vertical">
+            
+            <TextBlock Text="Einstellungen" FontSize="24" Foreground="LightYellow"/>
 
 
-        <StackPanel Orientation="Horizontal" Margin="20,50,0,0" VerticalAlignment="Top">
-            <CheckBox>
-                <TextBlock>
-				Enable feature <Run Foreground="Green" FontWeight="Bold">ABC</Run>
-                </TextBlock>
-            </CheckBox>
-        </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20,30,0,0" VerticalAlignment="Top">
+                
+                <Button Style="{StaticResource BTN_SUCCESS}" Click="Button_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <icons:BootstrapIcons Kind="Trash"/>
+                        <TextBlock Text="Settings.ini löschen und Neu starten" Margin="10,0,0,0"/>
+                    </StackPanel>
+                </Button>
 
-        <TextBlock Text="Einstellungen" FontSize="24" Foreground="LightYellow"/>
+                <Button Style="{StaticResource BTN_SUCCESS}" Click="Button_Click_1" Margin="20,0,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <icons:BootstrapIcons Kind="Folder2"/>
+                        <TextBlock Text="Öffne Settings.ini" Margin="10,0,0,0"/>
+                    </StackPanel>
         
+                </Button>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+
+                <mah:ToggleSwitch
+                    x:Name="LOG_DEL_SWITCH"
+                    Margin="25"
+                    OffContent="Log-Datei wird beim Starten nicht geleert"
+                    OnContent="Einträge der Log-Datei werden beim Starten entfernt"
+                    Toggled="ToggleSwitch_Toggled" />
+            </StackPanel>
+            
+            
+        </StackPanel>
+       
+
+       
     </Grid>
 </UserControl>

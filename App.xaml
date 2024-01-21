@@ -12,10 +12,13 @@
             <FontFamily x:Key="ALLER">pack://application:,,,/Fonts/#ALLER_STD</FontFamily>
             <FontFamily x:Key="RUBIK">pack://application:,,,/Fonts/#Rubik-Medium</FontFamily>
             <FontFamily x:Key="NICO">pack://application:,,,/Fonts/#NIKODECS</FontFamily>
-
-            
+       
             <ResourceDictionary.MergedDictionaries>
-
+                
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Lime.xaml" />
+                
                 <ResourceDictionary Source="Styles/Page.xaml" />
                 <ResourceDictionary Source="Styles/Image.xaml" />
                 <ResourceDictionary Source="Styles/Text.xaml" />

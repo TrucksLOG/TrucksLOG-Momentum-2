@@ -12,7 +12,7 @@
     <ApplicationIcon>1-52_icon-icons.com_60425.ico</ApplicationIcon>
     <UserSecretsId>d90a6896-776b-41aa-84d7-2da787ec224d</UserSecretsId>
     <Copyright>Blasius Thomas</Copyright>
-    <Version>1.0.0.2</Version>
+    <Version>1.0.0.4</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,6 +22,7 @@
     <None Remove="Fonts\Rubik-Medium.ttf" />
     <None Remove="Fonts\Rubik-Regular.ttf" />
     <None Remove="Images\ATS_LOGO.png" />
+    <None Remove="Images\Client_Back_1.jpg" />
     <None Remove="Images\Entwurf_02.3.1.png" />
     <None Remove="Images\ETS2_LOGO.png" />
     <None Remove="Images\Icon.ico" />
@@ -40,6 +41,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <COMReference Include="NETWORKLIST">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>0</VersionMinor>
+      <VersionMajor>1</VersionMajor>
+      <Guid>dcb00d01-570f-4a9b-8d69-199fdba5723b</Guid>
+      <Lcid>0</Lcid>
+      <Isolated>false</Isolated>
+      <EmbedInteropTypes>true</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Fonts\GOOD TIMING BD.OTF" />
     <Resource Include="Fonts\NIKODECS.OTF">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -51,6 +64,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\ATS_LOGO.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Client_Back_1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Entwurf_02.3.1.png">
@@ -107,6 +123,7 @@
     <PackageReference Include="GameFinder.Common" Version="4.1.0" />
     <PackageReference Include="GameFinder.RegistryUtils" Version="4.1.0" />
     <PackageReference Include="GameFinder.StoreHandlers.Steam" Version="4.1.0" />
+    <PackageReference Include="MahApps.Metro" Version="2.4.10" />
     <PackageReference Include="MahApps.Metro.IconPacks.BootstrapIcons" Version="4.11.0" />
     <PackageReference Include="MahApps.Metro.IconPacks.BoxIcons" Version="4.11.0" />
     <PackageReference Include="MahApps.Metro.IconPacks.FontAwesome" Version="4.11.0" />
@@ -115,7 +132,7 @@
     <PackageReference Include="MahApps.Metro.IconPacks.PicolIcons" Version="4.11.0" />
     <PackageReference Include="MahApps.Metro.IconPacks.RemixIcon" Version="4.11.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
-    <PackageReference Include="MySql.Data" Version="8.3.0" />
+    <PackageReference Include="MySqlConnector" Version="2.3.5" />
     <PackageReference Include="NLog" Version="5.2.8" />
     <PackageReference Include="PropertyTools.Wpf" Version="3.1.0" />
     <PackageReference Include="RestSharp" Version="110.2.0" />

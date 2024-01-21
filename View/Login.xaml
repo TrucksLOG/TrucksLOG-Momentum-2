@@ -5,44 +5,59 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TrucksLOG.View"
              xmlns:vm="clr-namespace:TrucksLOG.ViewModel"
-             xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks" 
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
             d:DesignHeight="400"
             d:DesignWidth="622"
             Style="{StaticResource Page_Style}">
 
+
     <UserControl.DataContext>
         <vm:NavigationVM/>
     </UserControl.DataContext>
-    
-   
+
+
+
     <Grid Margin="10,50,0,0">
         
         <StackPanel Orientation="Vertical">
            
             <TextBlock Text="Willkommen bei" HorizontalAlignment="Center" FontSize="44" FontFamily="{StaticResource NICO}" Foreground="Beige" Margin="0,10,0,5"/>
             <Image Source="/Images/Entwurf_02.3.1.png" Width="150"/>
-            <TextBlock Text="Wir beginnen mit der Einrichtung deines Spiel-Client. Als erstes benötigen wir deine STEAM-ID" HorizontalAlignment="Center" FontSize="16" Foreground="GreenYellow" FontFamily="{StaticResource NICO}" Margin="0,0,0,5"/>
-            <TextBlock Text="Falls du deine Steam-ID nicht kennen solltest, klicke auf den Button um zur Hilfeseite zu gelangen." HorizontalAlignment="Center" FontSize="16" Foreground="GreenYellow" FontFamily="{StaticResource NICO}" Margin="0,10,0,5"/>
+            <TextBlock Text="Wir beginnen mit der Einrichtung deines Spiel-Client. Als erstes benötigen wir deine STEAM-ID" HorizontalAlignment="Center" FontSize="16" Foreground="Lime" FontFamily="{StaticResource NICO}" Margin="0,0,0,5"/>
+            <TextBlock Text="Falls du deine Steam-ID nicht kennen solltest, klicke auf den Info-Button um zur Hilfeseite zu gelangen." HorizontalAlignment="Center" FontSize="16" Foreground="Lime" FontFamily="{StaticResource NICO}" Margin="0,10,0,5"/>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
                 <icons:PackIconBoxIcons Kind="LogosSteam" HorizontalAlignment="Center" Width="30" Height="30" Margin="10,10,10,0" Foreground="WhiteSmoke"/>
                 <TextBlock Text="STEAM-ID eingeben:" HorizontalAlignment="Center" FontSize="24" Foreground="GreenYellow" FontFamily="{StaticResource NICO}" Margin="0,10,0,5"/>
+                <Button Click="Button_Click_1" Background="Transparent" BorderThickness="0" Margin="10,6,0,0">
+                    <icons:PackIconBootstrapIcons Kind="InfoCircle" Foreground="White"/>
+                </Button>
+        
             </StackPanel>
 
-            
-            <TextBox x:Name="inp_steam_id" Width="250" FontSize="16" Style="{StaticResource placeHolder_ETS2}"/>
+
+            <TextBox x:Name="inp_steam_id" Width="250" FontSize="16" Background="Transparent" Foreground="LightCyan" Style="{StaticResource placeHolder_ETS2}" PreviewTextInput="inp_steam_id_PreviewTextInput"/>
 
 
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,50,0,0">
-                <Button Style="{StaticResource BTN_FORWARD}" Click="Button_Click">
+                <Button Style="{StaticResource BTN_FORWARD}" Click="Button_Click" x:Name="Weiter_BTN">
                     <icons:FontAwesome Kind="ArrowAltCircleRightSolid" Width="30" Height="30"/>
                 </Button>
             </StackPanel>
             
         </StackPanel>
-        
+
+
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
+            <StackPanel Orientation="Horizontal" Margin="-10,0,0,10" Cursor="Hand">
+                <icons:PackIconBootstrapIcons Kind="Link" Foreground="Orange" Margin="10,0,10,0"/>
+                <TextBlock Text="Bild von AllClear55 auf Pixabay" Foreground="WhiteSmoke" MouseDown="TextBlock_MouseDown"/>
+            </StackPanel>
+           
+        </StackPanel>
     </Grid>
     
 </UserControl>

@@ -9,20 +9,28 @@ namespace TrucksLOG.Utilities
         public static readonly IniFile MyIni = new IniFile(@"Settings.ini");
         public static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        public static void CLIENT_UPDATE()
+        public static bool CLIENT_UPDATE()
         {
-            if (MyIni.KeyExists("STEAM_ID", "USER"))
+            try
             {
-                AutoUpdater.Mandatory = true;
-                AutoUpdater.ReportErrors = false;
-                AutoUpdater.Icon = Properties.Resources.Thommy_64_64;
-                AutoUpdater.UpdateMode = Mode.Normal;
-                AutoUpdater.RunUpdateAsAdmin = true;
-                if (CHECK_BETA() != null)
+                if (MyIni.KeyExists("STEAM_ID", "USER"))
                 {
-                    Logger.Info("UPDATE_PATH: " + CHECK_BETA());
-                    AutoUpdater.Start(CHECK_BETA());
+                    AutoUpdater.Mandatory = true;
+                    AutoUpdater.ReportErrors = false;
+                    AutoUpdater.Icon = Properties.Resources.Thommy_64_64;
+                    AutoUpdater.UpdateMode = Mode.Normal;
+                    AutoUpdater.RunUpdateAsAdmin = true;
+                    if (CHECK_BETA() != null)
+                    {
+                        Logger.Info("UPDATE_PATH: " + CHECK_BETA());
+                        AutoUpdater.Start(CHECK_BETA());
+                    }
                 }
+                return true;
+            }catch(Exception ex)
+            {
+                Logger.Error(ex.ToString());
+                return false;
             }
         }
 

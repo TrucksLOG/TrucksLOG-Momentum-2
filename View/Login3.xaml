@@ -31,11 +31,11 @@
             
             <StackPanel Orientation="Horizontal">
                 <icons:PackIconForkAwesome Kind="Check" Width="35" Height="35" x:Name="CHECK_ICON" Foreground="LightGray" HorizontalAlignment="Left" Margin="0,5,10,0"/>
-                <Label x:Name="LBL_ATS_PFAD" Content="Pfad zu American Truck Simulator:" FontSize="12" Foreground="{StaticResource TextBrush_Yellow}" FontFamily="{StaticResource NICO}"/>
+                <Label x:Name="LBL_ATS_PFAD" Content="Pfad zu American Truck Simulator:" FontSize="12" Foreground="Lime" FontFamily="{StaticResource NICO}"/>
             </StackPanel>
             
             <StackPanel Orientation="Horizontal">
-                    <TextBox x:Name="inp_ats_path" Width="555" Style="{StaticResource placeHolder_ETS2}"/>
+                    <TextBox x:Name="inp_ats_path" Width="555" Style="{StaticResource placeHolder_ETS2}" Foreground="Lime"/>
                     <Button Height="35" HorizontalAlignment="Left" Margin="0" Name="BrowseFileATS" Padding="1" Width="45" Click="BrowseFileATS_Click" Style="{StaticResource BTN_SEARCH}">
                         <icons:BootstrapIcons Kind="Search"/>
                     </Button>

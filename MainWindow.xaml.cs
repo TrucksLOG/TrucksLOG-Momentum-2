@@ -4,6 +4,7 @@ using DiscordRPC.Logging;
 using NLog;
 using System;
 using System.IO;
+using System.Security.Policy;
 using System.Threading;
 using System.Windows;
 using System.Windows.Documents.DocumentStructures;
@@ -19,6 +20,7 @@ namespace TrucksLOG
         public DiscordRpcClient client;
         public static readonly IniFile MyIni = new IniFile(@"Settings.ini");
         public static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        
 
         public MainWindow()
         {
@@ -83,7 +85,6 @@ namespace TrucksLOG
 
 
         }
-
 
         private void CloseApp_Click(object sender, RoutedEventArgs e)
         {

@@ -17,14 +17,14 @@ namespace TrucksLOG.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Content = new Login4();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             if(MyIni.KeyExists("LENKUNG", "USER"))
             {
-                if(System.Windows.Forms.MessageBox.Show("Zum Abschluss der Einrichtung muss der Client neu gestartet werden...", "Confirmation", MessageBoxButtons.OK) == DialogResult.OK)
+                if(System.Windows.Forms.MessageBox.Show("Zum Abschluss der Einrichtung muss der Client neu gestartet werden...", "Confirm Restart", MessageBoxButtons.OK) == DialogResult.OK)
                 {
                     Config.RestartApp();
                 }

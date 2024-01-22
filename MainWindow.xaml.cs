@@ -35,9 +35,6 @@ namespace TrucksLOG
                 Environment.Exit(0);
             }
                
-          
-
-
             if (!Directory.Exists(Environment.GetFolderPath( Environment.SpecialFolder.MyDocuments ) + @"\TrucksLOG"))
                 Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\TrucksLOG");
 

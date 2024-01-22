@@ -20,7 +20,7 @@ namespace TrucksLOG.Utilities
 
         internal static string Get_ConnectionString()
         {
-            return @"Server=85.214.100.220;User ID=k103238web_ThomT;Password=Nj[Z4uU]@&5yrFH8X?Y19HUT(726aR{{E0^A;Database=k103238web_truckslog_29_01_21";
+            return GetAccessString();
         }
 
         public static string GetAccessString()
@@ -43,8 +43,9 @@ namespace TrucksLOG.Utilities
             {
                 string strQuery = "SELECT nickname, beta_tester, in_spedition, freigabe FROM user WHERE steamid = " + STEAM_ID;
 
-                var conn = new MySqlConnection(@GetAccessString());
-                conn.Open();
+                var conn = new MySqlConnection(Get_ConnectionString());
+                if (conn.State == ConnectionState.Closed)
+                    conn.Open();
                 using var command = new MySqlCommand(strQuery, conn);
                 using var reader = command.ExecuteReader();
                 while (reader.Read())
@@ -53,13 +54,13 @@ namespace TrucksLOG.Utilities
                     MainWindow.MyIni.Write("NICKNAME", reader["nickname"].ToString(), "USER");
                     MainWindow.MyIni.Write("FREIGABE", reader["freigabe"].ToString(), "USER");
                     MainWindow.MyIni.Write("SPEDITION", reader["in_spedition"].ToString(), "USER");
-                    MainWindow.MyIni.Write("BETA", reader["beta_tester"].ToString(), "USER");
+                    MainWindow.MyIni.Write("BETA_TESTER", reader["beta_tester"].ToString(), "USER");
                 }
                 conn.Close();
             }
             catch (Exception ex)
             {
-                Logger.Error("Fehler in Lade_NUM_TEXTE: " + ex.Message);
+                Logger.Error("Fehler in LOAD_USERDATA: " + ex.Message);
             }
         }
 
@@ -70,7 +71,7 @@ namespace TrucksLOG.Utilities
                 string strQuery = "SELECT id FROM c_tourtable_ALT WHERE steamid = @steamid AND startort = @startort AND startfirma = @startfirma AND zielort = @zielort AND zielfirma = @zielfirma AND einkommen = @einkommen AND ladung = @ladung";
 
 
-                using (var conn = new MySqlConnection(@GetAccessString()))
+                using (var conn = new MySqlConnection(Get_ConnectionString()))
                 {
                     conn.Open();
                     using (var command = new MySqlCommand(strQuery, conn))
@@ -101,8 +102,9 @@ namespace TrucksLOG.Utilities
             {
                 string strQuery = "INSERT INTO c_tourtable_ALT (steamid, tour_id, startort, startfirma, zielort, zielfirma, einkommen, ladung, gewicht) VALUES (@steamid, @tour_id, @startort, @startfirma, @zielort, @zielfirma, @einkommen, @ladung, @gewicht)";
 
-                var conn = new MySqlConnection(@GetAccessString());
-                conn.Open();
+                var conn = new MySqlConnection(Get_ConnectionString());
+                if (conn.State == ConnectionState.Closed)
+                    conn.Open();
                 using var command = new MySqlCommand(strQuery, conn);
                 command.Parameters.AddWithValue("steamid", MyIni.Read("STEAM_ID", "USER"));
                 command.Parameters.AddWithValue("tour_id", RandomString());
@@ -132,8 +134,9 @@ namespace TrucksLOG.Utilities
             {
                 string strQuery = "UPDATE c_tourtable_ALT SET status = 'Abgeschlossen' WHERE tour_id = @tourid AND steamid = @steamid";
 
-                var conn = new MySqlConnection(@GetAccessString());
-                conn.Open();
+                var conn = new MySqlConnection(Get_ConnectionString());
+                if (conn.State == ConnectionState.Closed)
+                    conn.Open();
                 using var command = new MySqlCommand(strQuery, conn);
                 command.Parameters.AddWithValue("tourid", TOUR_ID);
                 command.Parameters.AddWithValue("steamid", MyIni.Read("STEAM_ID", "USER"));
@@ -155,8 +158,10 @@ namespace TrucksLOG.Utilities
             {
                 string strQuery = "UPDATE c_tourtable_ALT SET status = 'Abgebrochen' WHERE tour_id = @tourid AND steamid = @steamid";
 
-                var conn = new MySqlConnection(@GetAccessString());
-                conn.Open();
+                var conn = new MySqlConnection(Get_ConnectionString());
+                if(conn.State == ConnectionState.Closed)
+                    conn.Open();
+
                 using var command = new MySqlCommand(strQuery, conn);
                 command.Parameters.AddWithValue("tourid", TOUR_ID);
                 command.Parameters.AddWithValue("steamid", MyIni.Read("STEAM_ID", "USER"));

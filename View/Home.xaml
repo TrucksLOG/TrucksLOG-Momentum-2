@@ -5,16 +5,35 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:TrucksLOG.View"
              xmlns:vm="clr-namespace:TrucksLOG.ViewModel"
-             xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks" xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d"
              d:DesignHeight="600"
              d:DesignWidth="622">
 
-    <Grid Margin="10">
 
-        <Border CornerRadius="0,20,20,0" Margin="0,5,5,0"/>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="25*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
 
-        <StackPanel x:Name="NO_STEAM_STACK" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+        <StackPanel x:Name="NO_STEAM_STACK" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="10" Visibility="Collapsed" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="Keine Steam-ID gefunden!" Foreground="YellowGreen" FontSize="24"/>
             <Button Click="Button_Click" Style="{StaticResource BTN_SUCCESS}" Margin="0,20,0,0">
                 <StackPanel Orientation="Horizontal">
@@ -22,55 +41,148 @@
                     <TextBlock Text="Setup neu Starten!" Margin="10,0,0,0"/>
                 </StackPanel>
             </Button>
-            
         </StackPanel>
+
+
+        <Grid Grid.Row="0" Grid.Column="2" Grid.RowSpan="5" HorizontalAlignment="Center" Background="#212529" Margin="0,10,0,0">
+            <icons:PackIconMaterial Kind="Fuel" Width="40" Height="30" Foreground="Red" Margin="55,0,0,10" VerticalAlignment="Bottom" Panel.ZIndex="110"/>
+            <Image Source="/Images/RPM_LEFT.png" Panel.ZIndex="100" Margin="-1"/>
+            <TextBlock Text="FUEL" Panel.ZIndex="101" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="30" RenderTransformOrigin="0.5,0.5" Foreground="YellowGreen" >
+                <TextBlock.LayoutTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-70"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.LayoutTransform>
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="0"/>
+                        <TranslateTransform X="0"/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <controls:MetroProgressBar IsIndeterminate="False" Background="#212529" Height="300" Minimum="1" Maximum="{Binding FUEL_MAX}" Value="{Binding FUEL_GERADE_INT}" Orientation="Vertical" >
+                <controls:MetroProgressBar.Foreground>
+                    <LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
+                        <GradientStop Color="Red" Offset="0.273"/>
+                        <GradientStop Color="#FF00FF03" Offset="0.511"/>
+                        <GradientStop Color="#FFD3FF00" Offset="0.444"/>
+                    </LinearGradientBrush>
+                </controls:MetroProgressBar.Foreground>
+            </controls:MetroProgressBar>
+        </Grid>
+
+        <!-- SPEED LABEL -->
+        <Grid Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Center">
+            <TextBlock Text="{Binding SPEED}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="LawnGreen" FontSize="98" FontFamily="{StaticResource GOOD_TIMES}" FontWeight="Bold"/>
+        </Grid>
+
+
+        <!-- TRUCK CENTER -->
+        <Grid Grid.Row="2" Grid.Column="1" Grid.RowSpan="4" HorizontalAlignment="Center">
+            <Image Source="/Images/truck_set.jpg" MinWidth="500"/>
+        </Grid>
+
+
+        <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="5" HorizontalAlignment="Center" Background="#212529" Margin="0,10,0,0">
+            <Image Source="/Images/RPM_RIGHT.png" Panel.ZIndex="100" Margin="-1"/>
+            <TextBlock Text="RPM" Panel.ZIndex="101" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="30" RenderTransformOrigin="0.5,0.5" Foreground="YellowGreen" >
+                <TextBlock.LayoutTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="70"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.LayoutTransform>
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="0"/>
+                        <TranslateTransform X="0"/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <controls:MetroProgressBar  IsIndeterminate="False" Height="300" Minimum="1" Maximum="{Binding RPM_MAX}" Value="{Binding RPM}" Orientation="Vertical" Background="{x:Null}" >
+                <controls:MetroProgressBar.Foreground>
+                    <LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
+                        <GradientStop Color="#FF00FF03" Offset="0.57"/>
+                        <GradientStop Color="Red" Offset="1"/>
+                    </LinearGradientBrush>
+                </controls:MetroProgressBar.Foreground>
+            </controls:MetroProgressBar>
+        </Grid>
+
+
+        <Grid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="5" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Center">
+            <Border BorderBrush="YellowGreen" BorderThickness="1" CornerRadius="10" Padding="5">
+                <StackPanel Orientation="Horizontal">
+                    <icons:PackIconMaterial Kind="Engine" Width="40" Height="30" Foreground="#FFC5C6C6" Margin="5,0,5,0"/>
+                    <icons:PackIconIonicons Kind="SpeedometerMD" Width="40" Height="30" Foreground="#FFEAFF00"/>
+                    <icons:PackIconMaterial Kind="AlarmLight" Width="40" Height="30" Foreground="#FFD83E0B" Margin="5,0,5,0"/>
+                    <icons:PackIconMaterial Kind="CarLightDimmed" Width="40" Height="30" Foreground="#FF1B55E5" Margin="5,0,5,0"/>
+                    <icons:PackIconMaterial Kind="CarLightHigh" Width="40" Height="30" Foreground="#FF1B55E5" Margin="5,0,5,0"/>
+                </StackPanel>
+
+            </Border>
+        </Grid>
+
+        <Grid Grid.Row="7" Grid.Column="0" Grid.RowSpan="2" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Top">
+            <Border BorderBrush="YellowGreen" BorderThickness="1" CornerRadius="10" Padding="5">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <icons:PackIconMaterial Kind="ClockStart" Foreground="White" Margin="0,0,10,0"/>
+                        <TextBlock Text="Startdaten" Foreground="YellowGreen" FontFamily="{StaticResource NICO}" FontSize="16"/>
+                    </StackPanel>
+                    <TextBlock Text="{Binding STARTORT}" Foreground="YellowGreen" FontFamily="{StaticResource NICO}" FontSize="16" Margin="0,5,0,0"/>
+                </StackPanel>
+            </Border>
+        </Grid>
         
-        
-        <StackPanel Orientation="Vertical" x:Name="DASHBOARD_STACK">
-            
-            <Label Foreground="White" HorizontalAlignment="Center" FontSize="60" Content="{Binding SPEED}" Margin="0,30,0,0" FontFamily="{StaticResource GOOD_TIMES}"/>
+        <Grid Grid.Row="7" Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Top">
+            <Border BorderBrush="YellowGreen" BorderThickness="1" CornerRadius="10" Padding="5">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <icons:PackIconMaterial Kind="CurrencyEur" Foreground="White" Margin="0,0,10,0"/>
+                        <TextBlock Text="Einkommen" Foreground="YellowGreen" FontFamily="{StaticResource NICO}" FontSize="16"/>
+                    </StackPanel>
 
-           
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
-                <icons:PackIconMaterial Kind="Speedometer" Margin="10,0,10,0" Foreground="White" Width="25" Height="25"/>
-                <TextBlock x:Name="common" Text="{Binding RPM}" Foreground="Yellow" HorizontalAlignment="Center" FontSize="18"/>
-                <TextBlock Text="RPM" Foreground="White" Margin="5,0,0,0" HorizontalAlignment="Center" FontSize="18"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,0">
+                        <TextBlock Text="{Binding EINKOMMEN}" Foreground="YellowGreen" FontFamily="{StaticResource NICO}" FontSize="16" Margin="0,5,0,0"/>
+                        <TextBlock Text="€" Foreground="YellowGreen" FontSize="16" Margin="5,2,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
 
-                <icons:PackIconMaterial Kind="GasStation" Margin="80,0,10,0" Foreground="White" Width="25" Height="25"/>
-                <TextBlock Text="{Binding FUEL_GERADE_INT}" Foreground="Yellow" HorizontalAlignment="Center" FontSize="18"/>
-                <TextBlock Text="Liter" Foreground="White" Margin="5,0,0,0" HorizontalAlignment="Center" FontSize="18"/>
-            </StackPanel>
+        <Grid Grid.Row="7" Grid.Column="2" Grid.RowSpan="2" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Top">
+            <Border BorderBrush="YellowGreen" BorderThickness="1" CornerRadius="10" Padding="5">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <icons:PackIconMaterial Kind="ClockEnd" Foreground="White" Margin="0,0,10,0"/>
+                        <TextBlock Text="Zieldaten" Foreground="YellowGreen" FontFamily="{StaticResource NICO}" FontSize="16"/>
+                    </StackPanel>
+                    <TextBlock Text="{Binding ZIELORT}" HorizontalAlignment="Center" Foreground="YellowGreen" FontFamily="{StaticResource NICO}" FontSize="16" Margin="0,5,0,0"/>
+                </StackPanel>
+            </Border>
+        </Grid>
 
+        <Grid Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="5" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Center">
+            <Border BorderBrush="YellowGreen" BorderThickness="1" CornerRadius="10" Padding="5">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <icons:PackIconFontAwesome Kind="TruckLoadingSolid" Foreground="White" Width="30" Height="30" Margin="0,0,10,0"/>
+                    <TextBlock Text="Ladung: " Margin="0,0,0,0" Foreground="YellowGreen" FontSize="20" FontFamily="{StaticResource NICO}" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding LADUNG}" Margin="0,0,10,0" Foreground="YellowGreen" FontSize="20" FontFamily="{StaticResource NICO}" VerticalAlignment="Center"/>
+                </StackPanel>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,30,0,0">
-                
-                <icons:PackIconMaterial Kind="ClockStart" Margin="10,0,10,0" Foreground="White" Width="25" Height="25"/>
-                <TextBlock Text="{Binding STARTORT}" Foreground="Yellow" HorizontalAlignment="Center" FontSize="18"/>
-
-                <icons:PackIconMaterial Kind="ClockEnd" Margin="180,0,10,0" Foreground="White" Width="25" Height="25"/>
-                <TextBlock Text="{Binding ZIELORT}" Foreground="Yellow" HorizontalAlignment="Center" FontSize="18"/>
-
-            </StackPanel>
-
-
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
-                <icons:PackIconFontAwesome Kind="TruckLoadingSolid" Margin="10,0,10,0" Foreground="White" Width="25" Height="25"/>
-                <TextBlock Text="{Binding LADUNG}" Foreground="Yellow" HorizontalAlignment="Center" FontSize="18"/>
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,30,0,0">
-
-                <icons:PackIconFontAwesome Kind="MoneyBillWaveSolid" Margin="10,0,10,0" Foreground="White" Width="25" Height="25"/>
-                <TextBlock Text="{Binding EINKOMMEN}" Foreground="Yellow" HorizontalAlignment="Center" FontSize="18"/>
-                <TextBlock Text=" €" Foreground="White" Margin="5,0,0,0" HorizontalAlignment="Center" FontSize="18"/>
-                
-                <icons:PackIconMaterial Kind="MapClock" Margin="180,0,10,0" Foreground="White" Width="25" Height="25"/>
-                <TextBlock Text="{Binding REST_KM}" Foreground="Yellow" HorizontalAlignment="Center" FontSize="18"/>
-
-            </StackPanel>
-
-        </StackPanel>
-      
+            </Border>
+        </Grid>
 
     </Grid>
+
 </UserControl>

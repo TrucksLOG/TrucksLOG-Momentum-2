@@ -23,6 +23,8 @@ namespace TrucksLOG.Utilities
             private double tankvolumen;
             private double fuel_gerade;
             private int fuel_gerade_int;
+            private double fuel_average;
+            private int fuel_max;
             private string fuel_gerade_Text;
             private string fuel_gerade_tankanzeige;
             private float kilometerstand;
@@ -163,8 +165,34 @@ namespace TrucksLOG.Utilities
             private string sponsor;
             private int speed_limit_player;
 
-            // IMPLEMENTS
-            public string USER_NICKNAME
+        // IMPLEMENTS
+
+        public int FUEL_MAX
+        {
+            get => fuel_max;
+            set
+            {
+                if (fuel_max != value)
+                {
+                    fuel_max = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public double FUEL_AVERAGE
+        {
+            get => fuel_average;
+            set
+            {
+                if (fuel_average != value)
+                {
+                    fuel_average = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        public string USER_NICKNAME
             {
                 get => user_nickname;
                 set

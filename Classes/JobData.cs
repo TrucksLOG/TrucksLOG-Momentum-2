@@ -75,5 +75,13 @@ namespace TrucksLOG.Classes
         public int TRAILER_CHANGER { get; set; }
         public int FERRY_COST { get; set; }
 
+
+
+
+
+        public static float Berechne_Frachtschaden(float CARGO_DAMAGE)
+        {
+           return (float)Math.Round(CARGO_DAMAGE * 100, 2);
+        }
     }
 }

@@ -62,30 +62,61 @@ namespace TrucksLOG.Utilities
                 Logger.Error("Fehler in Lade_NUM_TEXTE: " + ex.Message);
             }
         }
-    
-        public static int INSERT_TOUR(JobData job)
+
+        public static long CHECK_TOUR(JobData job)
         {
             try
             {
-                int ReturnType = 0;
+                string strQuery = "SELECT id FROM c_tourtable_ALT WHERE steamid = @steamid AND startort = @startort AND startfirma = @startfirma AND zielort = @zielort AND zielfirma = @zielfirma AND einkommen = @einkommen AND ladung = @ladung";
 
-                string strQuery = "INSERT INTO c_tourtable_ALT (steamid, tour_id, startort, startfirma, zielort, zielfirma) " +
-                    "VALUES (@steamid, @tour_id, @startort, @startfirma, @zielort, @zielfirma)";
 
-                Logger.Warn("JOB_DATA INCOMING: " + job.STARTORT + ", " + job.ZIELORT);
+                using (var conn = new MySqlConnection(@GetAccessString()))
+                {
+                    conn.Open();
+                    using (var command = new MySqlCommand(strQuery, conn))
+                    {
+                        command.Parameters.AddWithValue("steamid", MyIni.Read("STEAM_ID", "USER"));
+                        command.Parameters.AddWithValue("startort", job.STARTORT);
+                        command.Parameters.AddWithValue("startfirma", job.STARTFIRMA);
+                        command.Parameters.AddWithValue("zielort", job.ZIELORT);
+                        command.Parameters.AddWithValue("zielfirma", job.ZIELFIRMA);
+                        command.Parameters.AddWithValue("einkommen", job.EINKOMMEN);
+                        command.Parameters.AddWithValue("ladung", job.LADUNG);
+                        return Convert.ToInt32(command.ExecuteScalar());
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Fehler in CHECK_TOUR: " + ex.Message);
+                return 0;
+            }
+        }
+
+
+        public static long INSERT_TOUR(JobData job)
+        {
+            try
+            {
+                string strQuery = "INSERT INTO c_tourtable_ALT (steamid, tour_id, startort, startfirma, zielort, zielfirma, einkommen, ladung, gewicht) VALUES (@steamid, @tour_id, @startort, @startfirma, @zielort, @zielfirma, @einkommen, @ladung, @gewicht)";
 
                 var conn = new MySqlConnection(@GetAccessString());
                 conn.Open();
                 using var command = new MySqlCommand(strQuery, conn);
                 command.Parameters.AddWithValue("steamid", MyIni.Read("STEAM_ID", "USER"));
-                command.Parameters.AddWithValue("tour_id", job.INTERNE_ID);
+                command.Parameters.AddWithValue("tour_id", RandomString());
                 command.Parameters.AddWithValue("startort", job.STARTORT);
                 command.Parameters.AddWithValue("startfirma", job.STARTFIRMA);
                 command.Parameters.AddWithValue("zielort", job.ZIELORT);
                 command.Parameters.AddWithValue("zielfirma", job.ZIELFIRMA);
-                ReturnType = command.ExecuteNonQuery();
+                command.Parameters.AddWithValue("einkommen", job.EINKOMMEN);
+                command.Parameters.AddWithValue("ladung", job.LADUNG);
+                command.Parameters.AddWithValue("gewicht", job.GEWICHT);
+                command.ExecuteNonQuery();
+                var returnID = command.LastInsertedId; 
                 conn.Close();
-                return ReturnType;
+                return returnID;
             }
             catch (Exception ex)
             {
@@ -93,6 +124,54 @@ namespace TrucksLOG.Utilities
                 return 0;
             }
         }
+
+
+        public static int END_TOUR(long TOUR_ID)
+        {
+            try
+            {
+                string strQuery = "UPDATE c_tourtable_ALT SET status = 'Abgeschlossen' WHERE tour_id = @tourid AND steamid = @steamid";
+
+                var conn = new MySqlConnection(@GetAccessString());
+                conn.Open();
+                using var command = new MySqlCommand(strQuery, conn);
+                command.Parameters.AddWithValue("tourid", TOUR_ID);
+                command.Parameters.AddWithValue("steamid", MyIni.Read("STEAM_ID", "USER"));
+                var returnId = command.ExecuteNonQuery();
+                conn.Close();
+                return returnId;
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Fehler in END_TOUR: " + ex.Message);
+                return 0;
+            }
+        }
+
+
+        public static int ABORT_TOUR(long TOUR_ID)
+        {
+            try
+            {
+                string strQuery = "UPDATE c_tourtable_ALT SET status = 'Abgebrochen' WHERE tour_id = @tourid AND steamid = @steamid";
+
+                var conn = new MySqlConnection(@GetAccessString());
+                conn.Open();
+                using var command = new MySqlCommand(strQuery, conn);
+                command.Parameters.AddWithValue("tourid", TOUR_ID);
+                command.Parameters.AddWithValue("steamid", MyIni.Read("STEAM_ID", "USER"));
+                var returnId = command.ExecuteNonQuery();
+                conn.Close();
+                return returnId;
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Fehler in END_TOUR: " + ex.Message);
+                return 0;
+            }
+        }
+
+
     }
 
 

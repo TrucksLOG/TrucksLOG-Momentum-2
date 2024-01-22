@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using TrucksLOG.Utilities;
 using TrucksLOG.View;
 
+
 namespace TrucksLOG
 {
     public partial class MainWindow : Window

@@ -14,8 +14,11 @@ namespace TrucksLOG.Utilities
         public static string LogRoot { get; internal set; }
         static readonly string Datum = DateTime.Now.Day + "-" + DateTime.Now.Month + "-" + DateTime.Now.Year;
         public static readonly string REST_PULL_USER = "https://support.truckslog.de/REST/USERDATEN/index.php";
+        public static string GET_USERDATA_URL = "https://api.truckslog.de/MOMENTUM/REST/USERDATEN/GetUserData.php";
 
-        internal static string APP_Version()
+
+
+            internal static string APP_Version()
         {
             return Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }

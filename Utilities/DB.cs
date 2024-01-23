@@ -1,14 +1,14 @@
-﻿using GameFinder.StoreHandlers.Steam.Models;
-using Microsoft.Extensions.Configuration;
-using MySqlConnector;
+﻿using Newtonsoft.Json;
 using NLog;
+using RestSharp;
 using System;
 using System.Data;
-using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Intrinsics.Arm;
+using System.Text.Json;
 using System.Windows;
-using TrucksLOG.Classes;
+using System.Windows.Forms;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace TrucksLOG.Utilities
 {
@@ -18,18 +18,6 @@ namespace TrucksLOG.Utilities
         public static readonly IniFile MyIni = new IniFile(@"Settings.ini");
         private static Random random = new Random();
 
-        internal static string Get_ConnectionString()
-        {
-            return GetAccessString();
-        }
-
-        public static string GetAccessString()
-        {
-            ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
-            IConfiguration configuration = configurationBuilder.AddUserSecrets<Secrets>().Build();
-            return configuration.GetSection("validate")["accessString"];
-        }
-
         public static string RandomString(int length = 20)
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -37,152 +25,44 @@ namespace TrucksLOG.Utilities
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
-        public static void LOAD_USERDATA(ulong STEAM_ID)
+
+        public static string LOAD_USERDATA(ulong STEAM_ID)
         {
             try
             {
-                string strQuery = "SELECT nickname, beta_tester, in_spedition, freigabe FROM user WHERE steamid = " + STEAM_ID;
-
-                var conn = new MySqlConnection(Get_ConnectionString());
-                if (conn.State == ConnectionState.Closed)
-                    conn.Open();
-                using var command = new MySqlCommand(strQuery, conn);
-                using var reader = command.ExecuteReader();
-                while (reader.Read())
+                var client = new RestClient(@"https://api.truckslog.de/MOMENTUM/REST/USERDATEN/GetUserData.php");
+                client.AddDefaultQueryParameter("STEAM", STEAM_ID.ToString());
+                var response = client.Execute(new RestRequest(), Method.Post);
+                if(String.IsNullOrEmpty(response.Content))
                 {
-                    MainWindow.MyIni.Write("STEAM_ID", STEAM_ID.ToString(), "USER");
-                    MainWindow.MyIni.Write("NICKNAME", reader["nickname"].ToString(), "USER");
-                    MainWindow.MyIni.Write("FREIGABE", reader["freigabe"].ToString(), "USER");
-                    MainWindow.MyIni.Write("SPEDITION", reader["in_spedition"].ToString(), "USER");
-                    MainWindow.MyIni.Write("BETA_TESTER", reader["beta_tester"].ToString(), "USER");
-                }
-                conn.Close();
-            }
-            catch (Exception ex)
-            {
-                Logger.Error("Fehler in LOAD_USERDATA: " + ex.Message);
-            }
-        }
-
-        public static long CHECK_TOUR(JobData job)
-        {
-            try
-            {
-                string strQuery = "SELECT id FROM c_tourtable_ALT WHERE steamid = @steamid AND startort = @startort AND startfirma = @startfirma AND zielort = @zielort AND zielfirma = @zielfirma AND einkommen = @einkommen AND ladung = @ladung";
-
-
-                using (var conn = new MySqlConnection(Get_ConnectionString()))
-                {
-                    conn.Open();
-                    using (var command = new MySqlCommand(strQuery, conn))
-                    {
-                        command.Parameters.AddWithValue("steamid", MyIni.Read("STEAM_ID", "USER"));
-                        command.Parameters.AddWithValue("startort", job.STARTORT);
-                        command.Parameters.AddWithValue("startfirma", job.STARTFIRMA);
-                        command.Parameters.AddWithValue("zielort", job.ZIELORT);
-                        command.Parameters.AddWithValue("zielfirma", job.ZIELFIRMA);
-                        command.Parameters.AddWithValue("einkommen", job.EINKOMMEN);
-                        command.Parameters.AddWithValue("ladung", job.LADUNG);
-                        return Convert.ToInt32(command.ExecuteScalar());
-                    }
+                    return "Keine Daten gefunden!";
                 }
 
+                var json = JsonConvert.DeserializeObject<Userdaten>(response.Content);
+                MyIni.Write("NICKNAME", json.nickname, "USER");
+                MyIni.Write("SPEDITION", json.in_spedition, "USER");
+                MyIni.Write("RANG", json.rang.ToString(), "USER");
+                MyIni.Write("PATREON", json.patreon.ToString(), "USER");
+                MyIni.Write("FREIGABE", json.freigabe.ToString(), "USER");
+                MyIni.Write("PROFILBILD", json.profilbild, "USER");
+                MyIni.Write("REM", json.REM.ToString(), "USER");
+                MyIni.Write("BETA_TESTER", json.beta_tester.ToString(), "USER");
+                return "OK";
+
             }
             catch (Exception ex)
             {
-                Logger.Error("Fehler in CHECK_TOUR: " + ex.Message);
-                return 0;
+                Logger.Error("ERROR @LOAD_USERDATEN: " + ex.Message + ex.StackTrace);
+                return ex.Message;
             }
+
         }
 
 
-        public static long INSERT_TOUR(JobData job)
-        {
-            try
-            {
-                string strQuery = "INSERT INTO c_tourtable_ALT (steamid, tour_id, startort, startfirma, zielort, zielfirma, einkommen, ladung, gewicht) VALUES (@steamid, @tour_id, @startort, @startfirma, @zielort, @zielfirma, @einkommen, @ladung, @gewicht)";
-
-                var conn = new MySqlConnection(Get_ConnectionString());
-                if (conn.State == ConnectionState.Closed)
-                    conn.Open();
-                using var command = new MySqlCommand(strQuery, conn);
-                command.Parameters.AddWithValue("steamid", MyIni.Read("STEAM_ID", "USER"));
-                command.Parameters.AddWithValue("tour_id", RandomString());
-                command.Parameters.AddWithValue("startort", job.STARTORT);
-                command.Parameters.AddWithValue("startfirma", job.STARTFIRMA);
-                command.Parameters.AddWithValue("zielort", job.ZIELORT);
-                command.Parameters.AddWithValue("zielfirma", job.ZIELFIRMA);
-                command.Parameters.AddWithValue("einkommen", job.EINKOMMEN);
-                command.Parameters.AddWithValue("ladung", job.LADUNG);
-                command.Parameters.AddWithValue("gewicht", job.GEWICHT);
-                command.ExecuteNonQuery();
-                var returnID = command.LastInsertedId; 
-                conn.Close();
-                return returnID;
-            }
-            catch (Exception ex)
-            {
-                Logger.Error("Fehler in INSERT_TOUR: " + ex.Message);
-                return 0;
-            }
-        }
-
-
-        public static int END_TOUR(long TOUR_ID)
-        {
-            try
-            {
-                string strQuery = "UPDATE c_tourtable_ALT SET status = 'Abgeschlossen' WHERE tour_id = @tourid AND steamid = @steamid";
-
-                var conn = new MySqlConnection(Get_ConnectionString());
-                if (conn.State == ConnectionState.Closed)
-                    conn.Open();
-                using var command = new MySqlCommand(strQuery, conn);
-                command.Parameters.AddWithValue("tourid", TOUR_ID);
-                command.Parameters.AddWithValue("steamid", MyIni.Read("STEAM_ID", "USER"));
-                var returnId = command.ExecuteNonQuery();
-                conn.Close();
-                return returnId;
-            }
-            catch (Exception ex)
-            {
-                Logger.Error("Fehler in END_TOUR: " + ex.Message);
-                return 0;
-            }
-        }
-
-
-        public static int ABORT_TOUR(long TOUR_ID)
-        {
-            try
-            {
-                string strQuery = "UPDATE c_tourtable_ALT SET status = 'Abgebrochen' WHERE tour_id = @tourid AND steamid = @steamid";
-
-                var conn = new MySqlConnection(Get_ConnectionString());
-                if(conn.State == ConnectionState.Closed)
-                    conn.Open();
-
-                using var command = new MySqlCommand(strQuery, conn);
-                command.Parameters.AddWithValue("tourid", TOUR_ID);
-                command.Parameters.AddWithValue("steamid", MyIni.Read("STEAM_ID", "USER"));
-                var returnId = command.ExecuteNonQuery();
-                conn.Close();
-                return returnId;
-            }
-            catch (Exception ex)
-            {
-                Logger.Error("Fehler in END_TOUR: " + ex.Message);
-                return 0;
-            }
-        }
 
 
     }
 
 
 
-    class Secrets()
-    {
-       
-    }
 }

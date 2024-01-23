@@ -12,7 +12,7 @@
     <ApplicationIcon>1-52_icon-icons.com_60425.ico</ApplicationIcon>
     <UserSecretsId>d90a6896-776b-41aa-84d7-2da787ec224d</UserSecretsId>
     <Copyright>Blasius Thomas</Copyright>
-    <Version>1.0.0.6</Version>
+    <Version>1.0.0.9</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -41,18 +41,6 @@
     <None Remove="Images\shutdown_mo.png" />
     <None Remove="Images\TMP_LOGO.png" />
     <None Remove="Images\truck_set.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <COMReference Include="NETWORKLIST">
-      <WrapperTool>tlbimp</WrapperTool>
-      <VersionMinor>0</VersionMinor>
-      <VersionMajor>1</VersionMajor>
-      <Guid>dcb00d01-570f-4a9b-8d69-199fdba5723b</Guid>
-      <Lcid>0</Lcid>
-      <Isolated>false</Isolated>
-      <EmbedInteropTypes>true</EmbedInteropTypes>
-    </COMReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -132,6 +120,7 @@
   <ItemGroup>
     <PackageReference Include="Autoupdater.NET.Official" Version="1.8.4" />
     <PackageReference Include="DiscordRichPresence" Version="1.2.1.24" />
+    <PackageReference Include="Flurl.Http" Version="4.0.2" />
     <PackageReference Include="GameFinder.Common" Version="4.1.0" />
     <PackageReference Include="GameFinder.RegistryUtils" Version="4.1.0" />
     <PackageReference Include="GameFinder.StoreHandlers.Steam" Version="4.1.0" />

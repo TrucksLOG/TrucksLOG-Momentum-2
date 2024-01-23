@@ -27,8 +27,9 @@ namespace TrucksLOG
         {
             InitializeComponent();
 
+          
 
-            if(Config.AlreadyRunning() > 1)
+            if (Config.AlreadyRunning() > 1)
             {
                 MessageBox.Show("Der Client kann nur einmal gestartet werden!");
                 Logger.Warn("Client wurde mehrfach gestartet!");
@@ -108,10 +109,7 @@ namespace TrucksLOG
             if (MyIni.KeyExists("STEAM_ID", "USER"))
             {
                 Logger.Info("Update Client Result: " + Update.CLIENT_UPDATE());
-
                 DB.LOAD_USERDATA(ulong.Parse(MyIni.Read("STEAM_ID", "USER")));
-              
-
                 Navigation_Panel.Visibility = Visibility.Visible;
                 Image_Panel.Visibility = Visibility.Collapsed;
 
@@ -126,3 +124,4 @@ namespace TrucksLOG
 
     }
 }
+

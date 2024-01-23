@@ -103,86 +103,16 @@ namespace TrucksLOG.View
         }
 
         private void TelemetryJobCancelled(object sender, EventArgs e) {
-
-            if (TruckDaten.GAME_PAUSED)
-                return;
-
-            long TOUR_ID = Convert.ToInt64(TourIni.Read("TOUR_ID", "AKTUELLE_TOUR"));
-            int RETURN_ID = DB.ABORT_TOUR(TOUR_ID);
-
-            if (RETURN_ID == 1) {
-                MainWindow.Logger.Info("Tour mit der ID " + TOUR_ID + " wurde Abgebrochen!");
-                TourIni.DeleteSection("AKTUELLE_TOUR");
-            } else
-            {
-                MainWindow.Logger.Info("Tour mit der ID " + TOUR_ID + " konnte nicht Abgeschlossen werden! Retunr Value: " + RETURN_ID);
-            }
-
         }
 
         private void TelemetryJobDelivered(object sender, EventArgs e) {
 
-            if (TruckDaten.GAME_PAUSED)
-                return;
-
-            long TOUR_ID = Convert.ToInt64(TourIni.Read("TOUR_ID", "AKTUELLE_TOUR"));
-            int RETURN_ID = DB.END_TOUR(TOUR_ID);
-            if (RETURN_ID == 1)
-            {
-                MainWindow.Logger.Info("Tour mit der ID " + TOUR_ID + " wurde Abgeschlossen!");
-                TourIni.DeleteSection("AKTUELLE_TOUR");
-            } else
-            {
-                MainWindow.Logger.Info("Tour mit der ID " + TOUR_ID + " konnte nicht Abgeschlossen werden! Retunr Value: " + RETURN_ID);
-            }
 
         }
 
         private void TelemetryOnJobStarted(object sender, EventArgs e) {
-
-            if (TruckDaten.GAME_PAUSED)
-                return;
-
-            JobData job = new()
-            {
-                STARTORT = TruckDaten.STARTORT,
-                STARTFIRMA = TruckDaten.STARTFIRMA,
-                ZIELORT = TruckDaten.ZIELORT,
-                ZIELFIRMA = TruckDaten.ZIELFIRMA,
-                LADUNG = TruckDaten.LADUNG,
-                GEWICHT = TruckDaten.GEWICHT,
-                EINKOMMEN = TruckDaten.EINKOMMEN
-            };
-
-            long CHECK = DB.CHECK_TOUR(job);
-
-            if (CHECK == 0)
-            {
-                long TOUR_ID = DB.INSERT_TOUR(job);
-
-                MainWindow.Logger.Info("Neue Tour mit ID: " + TOUR_ID + " wurde eingetragen!");
-
-                TourIni.Write("TOUR_ID", TOUR_ID.ToString(), "AKTUELLE_TOUR");
-                TourIni.Write("STARTORT", job.STARTORT, "AKTUELLE_TOUR");
-                TourIni.Write("ZIELORT", job.ZIELORT, "AKTUELLE_TOUR");
-                TourIni.Write("STARFIRMA", job.STARTFIRMA, "AKTUELLE_TOUR");
-                TourIni.Write("ZIELFIRMA", job.ZIELFIRMA, "AKTUELLE_TOUR");
-                TourIni.Write("EINKOMMEN", job.EINKOMMEN.ToString(), "AKTUELLE_TOUR");
-                TourIni.Write("TOUR_STATUS", "AUF FAHRT", "AKTUELLE_TOUR");
-
-            }
-            else
-            {
-                TourIni.Write("TOUR_ID", CHECK.ToString(), "AKTUELLE_TOUR");
-                TourIni.Write("STARTORT", job.STARTORT, "AKTUELLE_TOUR");
-                TourIni.Write("ZIELORT", job.ZIELORT, "AKTUELLE_TOUR");
-                TourIni.Write("STARFIRMA", job.STARTFIRMA, "AKTUELLE_TOUR");
-                TourIni.Write("ZIELFIRMA", job.ZIELFIRMA, "AKTUELLE_TOUR");
-                TourIni.Write("EINKOMMEN", job.EINKOMMEN.ToString(), "AKTUELLE_TOUR");
-                TourIni.Write("TOUR_STATUS", "AUF FAHRT", "AKTUELLE_TOUR");
-
-                MainWindow.Logger.Info("Tour von " + job.STARTORT + " nach " + job.ZIELORT + " ist mit der ID " + CHECK + " schon vorhanden!");
-            }
+      
+            
         }
 
         private void TelemetryRefuel(object sender, EventArgs e) {

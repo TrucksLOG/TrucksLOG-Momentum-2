@@ -1,8 +1,7 @@
 ﻿using NLog;
 using SteamUserInfo;
-using System.Diagnostics;
+using System;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using TrucksLOG.Utilities;
@@ -19,7 +18,6 @@ namespace TrucksLOG.View
         public Login()
         {
             InitializeComponent();
-
             SearchSTEAM_ID();
         }
 
@@ -43,7 +41,9 @@ namespace TrucksLOG.View
                 inp_steam_id.Text = userid.ToString();
             } else
             {
-                inp_steam_id.Text = null;
+                MessageBox.Show("Keine STEAM-Installation gefunden!\n\nOhne STEAM kannst du unsere Software nicht nutzen.", "STEAM-Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+                Environment.Exit(0);
+                inp_steam_id.Text = "";
             }
 
         }
@@ -57,11 +57,16 @@ namespace TrucksLOG.View
 
             if (STEAM > 10)
             {
-                MyIni.Write("STEAM_ID", STEAM.ToString(), "USER");
+                if(DB.LOAD_USERDATA(STEAM) == "OK")
+                {
+                    this.Content = new Login2();
+                } else
+                {
+                    MessageBox.Show("Fehler bei der Datenabfrage! \n\n Fehler: " + DB.LOAD_USERDATA(STEAM), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                    this.Content = new Login();
+                }
 
-                DB.LOAD_USERDATA(STEAM);
-
-                this.Content = new Login2();
+          
 
             } else
             {

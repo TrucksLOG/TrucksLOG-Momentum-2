@@ -41,6 +41,7 @@
     <None Remove="Images\shutdown_mo.png" />
     <None Remove="Images\TMP_LOGO.png" />
     <None Remove="Images\truck_set.jpg" />
+    <None Remove="Resources\scs-telemetry.dll" />
   </ItemGroup>
 
   <ItemGroup>
@@ -85,6 +86,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\truck_set.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\scs-telemetry.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Content Include="1-52_icon-icons.com_60425.ico" />

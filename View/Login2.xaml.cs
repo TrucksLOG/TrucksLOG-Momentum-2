@@ -87,6 +87,9 @@ namespace TrucksLOG.View
         {
             if(inp_ets_path != null) {
                 MyIni.Write("ETS_PATH", inp_ets_path.Text, "GAMES");
+
+
+
                 this.Content = new Login3();
             } else
             {

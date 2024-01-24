@@ -65,9 +65,6 @@ namespace TrucksLOG.View
                     MessageBox.Show("Fehler bei der Datenabfrage! \n\n Fehler: " + DB.LOAD_USERDATA(STEAM), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                     this.Content = new Login();
                 }
-
-          
-
             } else
             {
                 MessageBox.Show("Fehler beim Abfragen der STEAM-ID!\n\nBitte überprüfe deine Steam-ID auf der Webseite und bei der Eingabe.");
@@ -84,7 +81,13 @@ namespace TrucksLOG.View
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Wird noch eingebaut!");
+            try
+            {
+                Config.GOTO_URL("https://wiki.truckslog.de/de/steamid");
+            } catch (Exception ex)
+            {
+                Logger.Error(ex);
+            }
         }
 
         private void TextBlock_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)

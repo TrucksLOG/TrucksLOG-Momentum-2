@@ -118,23 +118,25 @@ namespace TrucksLOG.Utilities
             private long einnahmen;
             private string status_tour;
             private uint abgabe_km;
+        private bool autoloading;
+        private bool autoparking;
 
             // TANKEN
             private float liter_getankt;
 
             // MAUT
-            private int mautstation_gebühr;
+            private int mautstation_gebuehr;
 
             // STRAFEN
-            private int strafe_gebühr;
+            private int strafe_gebuehr;
             private string strafe_vergehen;
             private int strafe_job_cancel;
 
             // TRAIN - FERRY
-            private int transport_gebühr_fähre;
-            private int transport_gebühr_zug;
-            private string transport_startort_fähre;
-            private string transport_zielort_fähre;
+            private int transport_gebuehr_fähre;
+            private int transport_gebuehr_zug;
+            private string transport_startort_faehre;
+            private string transport_zielort_faehre;
             private string transport_startort_zug;
             private string transport_zielort_zug;
 
@@ -166,6 +168,31 @@ namespace TrucksLOG.Utilities
             private int speed_limit_player;
 
         // IMPLEMENTS
+
+        public bool AUTOLOADING
+        {
+            get => autoloading;
+            set
+            {
+                if (autoloading != value)
+                {
+                    autoloading = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        public bool AUTOPARKING
+        {
+            get => autoparking;
+            set
+            {
+                if (autoparking != value)
+                {
+                    autoparking = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
 
         public int FUEL_MAX
         {
@@ -1439,27 +1466,27 @@ namespace TrucksLOG.Utilities
             }
 
 
-            public int TRANSPORT_GEBÜHR_ZUG
+            public int TRANSPORT_GEBUEHR_ZUG
             {
-                get => transport_gebühr_zug;
+                get => transport_gebuehr_zug;
                 set
                 {
-                    if (transport_gebühr_zug != value)
+                    if (transport_gebuehr_zug != value)
                     {
-                        transport_gebühr_zug = value;
+                    transport_gebuehr_zug = value;
                         NotifyPropertyChanged();
                     }
                 }
             }
 
-            public int TRANSPORT_GEBÜHR_FÄHRE
+            public int TRANSPORT_GEBUEHR_FÄHRE
             {
-                get => transport_gebühr_fähre;
+                get => transport_gebuehr_fähre;
                 set
                 {
-                    if (transport_gebühr_fähre != value)
+                    if (transport_gebuehr_fähre != value)
                     {
-                        transport_gebühr_fähre = value;
+                    transport_gebuehr_fähre = value;
                         NotifyPropertyChanged();
                     }
                 }
@@ -1467,12 +1494,12 @@ namespace TrucksLOG.Utilities
 
             public string TRANSPORT_STARTORT_FÄHRE
             {
-                get => transport_startort_fähre;
+                get => transport_startort_faehre;
                 set
                 {
-                    if (transport_startort_fähre != value)
+                    if (transport_startort_faehre != value)
                     {
-                        transport_startort_fähre = value;
+                    transport_startort_faehre = value;
                         NotifyPropertyChanged();
                     }
                 }
@@ -1480,12 +1507,12 @@ namespace TrucksLOG.Utilities
 
             public string TRANSPORT_ZIELORT_FÄHRE
             {
-                get => transport_zielort_fähre;
+                get => transport_zielort_faehre;
                 set
                 {
-                    if (transport_zielort_fähre != value)
+                    if (transport_zielort_faehre != value)
                     {
-                        transport_zielort_fähre = value;
+                    transport_zielort_faehre = value;
                         NotifyPropertyChanged();
                     }
                 }
@@ -1558,28 +1585,28 @@ namespace TrucksLOG.Utilities
             }
 
 
-            public int STRAFE_GEBÜHR
+            public int STRAFE_GEBUEHR
             {
-                get => strafe_gebühr;
+                get => strafe_gebuehr;
                 set
                 {
-                    if (strafe_gebühr != value)
+                    if (strafe_gebuehr != value)
                     {
-                        strafe_gebühr = value;
+                    strafe_gebuehr = value;
                         NotifyPropertyChanged();
                     }
                 }
             }
 
 
-            public int MAUTSTATION_GEBÜHR
+            public int MAUTSTATION_GEBUEHR
             {
-                get => mautstation_gebühr;
+                get => mautstation_gebuehr;
                 set
                 {
-                    if (mautstation_gebühr != value)
+                    if (mautstation_gebuehr != value)
                     {
-                        mautstation_gebühr = value;
+                        mautstation_gebuehr = value;
                         NotifyPropertyChanged();
                     }
                 }

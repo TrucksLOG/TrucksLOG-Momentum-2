@@ -68,5 +68,10 @@ namespace TrucksLOG.Utilities
 
         }
         
+
+        public static ulong TIMESTAMP()
+        {
+           return (ulong)(DateTime.Now.Subtract(new DateTime(1970, 1, 1)).TotalSeconds);
+        }
     }
 }

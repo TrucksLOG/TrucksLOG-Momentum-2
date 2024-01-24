@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using GameFinder.StoreHandlers.Steam.Models;
+using Newtonsoft.Json;
 using NLog;
 using RestSharp;
 using System;
@@ -8,6 +9,7 @@ using System.Runtime.Intrinsics.Arm;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Forms;
+using TrucksLOG.Classes;
 using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace TrucksLOG.Utilities
@@ -39,6 +41,7 @@ namespace TrucksLOG.Utilities
                 }
 
                 var json = JsonConvert.DeserializeObject<Userdaten>(response.Content);
+                MyIni.Write("STEAM_ID", STEAM_ID.ToString(), "USER");
                 MyIni.Write("NICKNAME", json.nickname, "USER");
                 MyIni.Write("SPEDITION", json.in_spedition, "USER");
                 MyIni.Write("RANG", json.rang.ToString(), "USER");
@@ -59,8 +62,44 @@ namespace TrucksLOG.Utilities
         }
 
 
+        public static string CHECK_TOUR(string startort, string startfirma, string zielort, string zielfirma, string ladung, float gewicht)
+        {
+            try
+            {
+                var client = new RestClient(@"https://api.truckslog.de/MOMENTUM/REST/TOUR/Check_Tour.php");
+                client.AddDefaultQueryParameter("STEAM", MyIni.Read("STEAM_ID", "USER").ToString());
+                client.AddDefaultQueryParameter("STARTORT",startort);
+                client.AddDefaultQueryParameter("STARTFIRMA", startfirma);
+                client.AddDefaultQueryParameter("ZIELORT", zielort);
+                client.AddDefaultQueryParameter("ZIELFIRMA", zielfirma);
+                client.AddDefaultQueryParameter("LADUNG", ladung);
+                client.AddDefaultQueryParameter("GEWICHT", gewicht.ToString());
+                var resp = client.Execute(new RestRequest(), Method.Post);
+                Logger.Info(resp.Content);
+                return resp.Content;
+
+            } catch
+            {
+                return "FALSE";
+            }
+        }
+
+        internal static void TOUR_INSERT(JobData job)
+        {
+            var client = new RestClient(@"https://api.truckslog.de/MOMENTUM/REST/TOUR/Check_Tour.php");
+            client.AddDefaultQueryParameter("STEAM", MyIni.Read("STEAM_ID", "USER").ToString());
+            client.AddDefaultQueryParameter("STARTORT", job.STARTORT);
+            client.AddDefaultQueryParameter("STARTFIRMA", job.STARTFIRMA);
+            client.AddDefaultQueryParameter("ZIELORT", job.ZIELORT);
+            client.AddDefaultQueryParameter("ZIELFIRMA", job.ZIELFIRMA);
+            client.AddDefaultQueryParameter("LADUNG", job.LADUNG);
+            client.AddDefaultQueryParameter("GEWICHT", job.GEWICHT.ToString());
 
 
+            var resp = client.Execute(new RestRequest(), Method.Post);
+            Logger.Info("INSERT TOR: " + resp.Content);
+
+        }
     }
 
 

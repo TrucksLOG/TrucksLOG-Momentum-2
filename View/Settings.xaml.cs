@@ -3,8 +3,11 @@ using MahApps.Metro.Controls;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Windows;
 using System.Windows.Controls;
 using TrucksLOG.Utilities;
+using WK.Libraries.BootMeUpNS;
+
 
 namespace TrucksLOG.View
 {
@@ -20,8 +23,10 @@ namespace TrucksLOG.View
             InitializeComponent();
 
             CLIENT_TOPMOST.IsOn = MyIni.Read("TOPMOST", "SETTINGS") == "1";
+            CLIENT_AUTORUN.IsOn = MyIni.Read("AUTORUN", "SETTINGS") == "1";
             ARGUMENTS_ETS2.Text = MyIni.Read("ETS_ARGUMENTS", "GAMES");
             ARGUMENTS_ATS.Text = MyIni.Read("ATS_ARGUMENTS", "GAMES");
+            
 
             if (MyIni.KeyExists("DEL_LOG", "SETTINGS") && MyIni.Read("DEL_LOG", "SETTINGS") == "1")
             {
@@ -96,6 +101,35 @@ namespace TrucksLOG.View
         private void ARGUMENTS_ATS_TextChanged(object sender, TextChangedEventArgs e)
         {
             MyIni.Write("ATS_ARGUMENTS", ARGUMENTS_ATS.Text, "GAMES");
+        }
+
+        private void CLIENT_AUTORUN_Toggled(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var bootMeUp = new BootMeUp
+            {
+                UseAlternativeOnFail = true,
+                BootArea = BootMeUp.BootAreas.Registry,
+                TargetUser = BootMeUp.TargetUsers.CurrentUser
+            };
+
+            ToggleSwitch toggleSwitch = sender as ToggleSwitch;
+            if (toggleSwitch != null)
+            {
+                if (toggleSwitch.IsOn == true)
+                {
+                    MyIni.Write("AUTORUN", "1", "SETTINGS");
+                    bootMeUp.Enabled = true;
+                    if (bootMeUp.Successful)
+                        MessageBox.Show("TrucksLOG wird jetzt mit Windows gestartet.");
+                }
+                else
+                {
+                    MyIni.Write("AUTORUN", "0", "SETTINGS");
+                    bootMeUp.Enabled = false;
+                    if (!bootMeUp.Successful)
+                        MessageBox.Show("TrucksLOG wurde aus dem Autostarte entfernt.");
+                }
+            }
         }
     }
 }

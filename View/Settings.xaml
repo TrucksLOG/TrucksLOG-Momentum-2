@@ -76,7 +76,17 @@
                     OnContent="Client in den Hintergrund"
                     Toggled="CLIENT_TOPMOST_Toggled" />
             </StackPanel>
-            
+
+            <StackPanel Orientation="Horizontal">
+                <mah:ToggleSwitch
+                    x:Name="CLIENT_AUTORUN"
+                    Margin="25,0,0,0"
+                    OffContent="Client nicht mit Windows starten"
+                    OnContent="Client wird mit Windows gestartet"
+                    Toggled="CLIENT_AUTORUN_Toggled" />
+            </StackPanel>
+
+
         </StackPanel>
        
 

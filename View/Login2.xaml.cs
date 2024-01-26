@@ -9,6 +9,8 @@ using System.Windows;
 using System.Windows.Controls;
 using GameFinder.Common;
 using System.IO;
+using System.Windows.Forms.VisualStyles;
+using System.Text;
 
 namespace TrucksLOG.View
 {
@@ -88,7 +90,7 @@ namespace TrucksLOG.View
         {
             if(inp_ets_path != null) {
 
-                INSERT_TELEMETRY(inp_ets_path.Text);
+                INSERT_TELEMETRY(inp_ets_path.Text.Replace(@"\", @"/"));
                 MyIni.Write("ETS_PATH", inp_ets_path.Text, "GAMES");
 
                 this.Content = new Login3();
@@ -105,20 +107,24 @@ namespace TrucksLOG.View
         {
             try
             {
-                if (Directory.Exists(PATH + @"\bin\win_x64\plugins\"))
+                string firstPath = PATH.Replace("/eurotrucks2.exe", "");
+
+                if (Directory.Exists(firstPath + "/plugins"))
                 {
-                    File.Copy(@"Assets/scs-telemetry.dll", PATH + @"\bin\win_x64\plugins\scs-telemetry.dll", true);
+                    MainWindow.Logger.Info("ETS2 Path: " + firstPath + @"/plugins" + " exists!");
+                    File.Copy(@"Assets/scs-telemetry.dll", firstPath + @"/plugins/scs-telemetry.dll", true);
                 }
                 else
                 {
-                    Directory.CreateDirectory(PATH + @"\bin\win_x64\plugins\");
-                    File.Copy("Assets/scs-telemetry.dll", PATH + @"\bin\win_x64\plugins\scs-telemetry.dll", true);
+                    MainWindow.Logger.Info("ETS2 Path " + firstPath + @"/plugins" + " not exist! We create Directory: " + firstPath + @"/plugins");
+                    Directory.CreateDirectory(firstPath + @"/plugins");
+                    File.Copy("Assets/scs-telemetry.dll", firstPath + @"/plugins/scs-telemetry.dll", true);
                 }
                 return true;
             }
             catch (Exception ex)
             {
-                MainWindow.Logger.Error(ex.Message);
+                MainWindow.Logger.Error("Telemetry ETS2 Error: " + ex.Message);
                 return false;
             }
         }

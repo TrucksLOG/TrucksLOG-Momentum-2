@@ -46,6 +46,11 @@ namespace TrucksLOG.View
             File.WriteAllText(FileName, string.Empty);
         }
 
+        public static void CLEAR_SETTINGS()
+        {
+            File.Delete("Settings.ini");
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var d = DateTime.Now;

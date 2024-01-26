@@ -30,6 +30,7 @@ namespace TrucksLOG
         public MainWindow()
         {
             InitializeComponent();
+
             if (Config.AlreadyRunning() > 1)
             {
                 MessageBox.Show("Der Client kann nur einmal gestartet werden!");
@@ -106,6 +107,8 @@ namespace TrucksLOG
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+
+            
 
             this.Topmost = MyIni.Read("TOPMOST", "SETTINGS") == "1";
             

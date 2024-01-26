@@ -88,7 +88,7 @@ namespace TrucksLOG.View
         {
             if(inp_ats_path != null)
             {
-                INSERT_TELEMETRY(inp_ats_path.Text);
+                INSERT_TELEMETRY(inp_ats_path.Text.Replace(@"\", @"/"));
                 MyIni.Write("ATS_PATH", inp_ats_path.Text, "GAMES");
             }
             this.Content = new Login4();
@@ -98,19 +98,23 @@ namespace TrucksLOG.View
         {
             try
             {
-                if (Directory.Exists(PATH + @"\bin\win_x64\plugins\"))
+                string firstPath = PATH.Replace("/amtrucks.exe", "");
+
+                if (Directory.Exists(firstPath + @"/plugins"))
                 {
-                    File.Copy(@"Assets/scs-telemetry.dll", PATH + @"\bin\win_x64\plugins\scs-telemetry.dll", true);
+                    MainWindow.Logger.Info("ATS Path " + firstPath + @"/plugins" + " exists!");
+                    File.Copy(@"Assets/scs-telemetry.dll", firstPath + @"/plugins/scs-telemetry.dll", true);
                 }
                 else
                 {
-                    Directory.CreateDirectory(PATH + @"\bin\win_x64\plugins\");
-                    File.Copy("Assets/scs-telemetry.dll", PATH + @"\bin\win_x64\plugins\scs-telemetry.dll", true);
+                    MainWindow.Logger.Info("ATS Path " + firstPath + @"/plugins" + " not exist! We create Directory: " + firstPath + @"/plugins");
+                    Directory.CreateDirectory(firstPath + @"/plugins");
+                    File.Copy("Assets/scs-telemetry.dll", firstPath + @"/plugins/scs-telemetry.dll", true);
                 }
                 return true;
             } catch (Exception ex)
             {
-                MainWindow.Logger.Error(ex.Message);
+                MainWindow.Logger.Error("Telemetry ATS Error: " + ex.Message);
                 return false;
             }
         }

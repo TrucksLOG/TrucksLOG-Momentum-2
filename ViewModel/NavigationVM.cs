@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.IO;
+using System.Windows.Input;
 using TrucksLOG.Utilities;
 
 namespace TrucksLOG.ViewModel
@@ -65,9 +66,15 @@ namespace TrucksLOG.ViewModel
             ImpressumCommand = new RelayCommand(ShowImpressum);
 
             // Startup Page
-            if (MyIni.KeyExists("STEAM_ID", "USER")) {
+
+            if (MyIni.KeyExists("STEAM_ID", "USER") && MyIni.KeyExists("ETS_PATH", "GAMES")) 
+            {
                 CurrentView = new HomeVM();
-            } else
+            } 
+            else if (MyIni.KeyExists("STEAM_ID", "USER") && !MyIni.KeyExists("ETS_PATH", "GAMES"))
+            {
+                CurrentView = new Login2VM();
+            } else 
             {
                 CurrentView = new LoginVM();
             }

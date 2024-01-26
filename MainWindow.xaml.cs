@@ -3,15 +3,19 @@ using DiscordRPC;
 using DiscordRPC.Logging;
 using NLog;
 using System;
+using System.Drawing;
 using System.IO;
+using System.Net;
 using System.Security.Policy;
 using System.Threading;
 using System.Windows;
 using System.Windows.Documents.DocumentStructures;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TrucksLOG.Utilities;
 using TrucksLOG.View;
+using TrucksLOG.ViewModel;
 
 
 namespace TrucksLOG
@@ -26,9 +30,6 @@ namespace TrucksLOG
         public MainWindow()
         {
             InitializeComponent();
-
-          
-
             if (Config.AlreadyRunning() > 1)
             {
                 MessageBox.Show("Der Client kann nur einmal gestartet werden!");
@@ -101,13 +102,24 @@ namespace TrucksLOG
  
         }
 
+  
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
-
+            this.Topmost = MyIni.Read("TOPMOST", "SETTINGS") == "1";
+            
             if (MyIni.KeyExists("STEAM_ID", "USER"))
             {
+
+
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(MyIni.Read("PROFILBILD", "USER"), UriKind.Absolute);
+                bitmap.EndInit();
+
+                IMG_PROFILE.ImageSource = bitmap;
+
                 Logger.Info("Update Client Result: " + Update.CLIENT_UPDATE());
                 DB.LOAD_USERDATA(ulong.Parse(MyIni.Read("STEAM_ID", "USER")));
                 Navigation_Panel.Visibility = Visibility.Visible;
@@ -119,8 +131,6 @@ namespace TrucksLOG
                 Image_Panel.Visibility= Visibility.Visible;
             }
         }
-
-
 
     }
 }

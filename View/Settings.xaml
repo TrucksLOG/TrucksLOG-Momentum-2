@@ -18,7 +18,7 @@
     <Grid Margin="15">
         <StackPanel Orientation="Vertical">
             
-            <TextBlock Text="Einstellungen" FontSize="24" Foreground="LightYellow"/>
+            <TextBlock Text="Einstellungen" Style="{StaticResource UEBERSCHRIFT}"/>
 
 
             <StackPanel Orientation="Horizontal" Margin="20,30,0,0" VerticalAlignment="Top">
@@ -26,7 +26,7 @@
                 <Button Style="{StaticResource BTN_SUCCESS}" Click="Button_Click">
                     <StackPanel Orientation="Horizontal">
                         <icons:BootstrapIcons Kind="Trash"/>
-                        <TextBlock Text="Settings.ini löschen und Neu starten" Margin="10,0,0,0"/>
+                        <TextBlock Text="Client-Reset und Neustart" Margin="10,0,0,0"/>
                     </StackPanel>
                 </Button>
 
@@ -39,16 +39,43 @@
                 </Button>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="25,20,0,0">
+          
+                <TextBlock Text="Start-Argumente ETS2:" Foreground="White" VerticalAlignment="Center" FontFamily="{StaticResource NICO}" FontSize="16" Margin="0,0,10,0"/>
+                <TextBox Name="ARGUMENTS_ETS2" mah:TextBoxHelper.Watermark="e.g. --nointro" Width="300" Style="{StaticResource MahApps.Styles.TextBox}" VerticalAlignment="Center" Padding="10" TextChanged="ARGUMENTS_ETS2_TextChanged"/>
+                <Button Click="Button_Click_3" Margin="10,0,0,0" Style="{StaticResource BTN_SUCCESS}">
+                    <icons:PackIconMaterial Kind="HelpCircleOutline" Foreground="Black"/>
+                </Button>
+            </StackPanel>
 
-                <mah:ToggleSwitch
-                    x:Name="LOG_DEL_SWITCH"
-                    Margin="25"
-                    OffContent="Log-Datei wird beim Starten nicht geleert"
-                    OnContent="Einträge der Log-Datei werden beim Starten entfernt"
-                    Toggled="ToggleSwitch_Toggled" />
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="25,20,0,0">
+                <TextBlock Text="Start-Argumente ATS:" Foreground="White" VerticalAlignment="Center" FontFamily="{StaticResource NICO}" FontSize="16" Margin="0,0,18,0"/>
+                <TextBox Name="ARGUMENTS_ATS" mah:TextBoxHelper.Watermark="e.g. --nointro" Width="300" Style="{StaticResource MahApps.Styles.TextBox}" VerticalAlignment="Center" Padding="10" TextChanged="ARGUMENTS_ATS_TextChanged"/>
+                
+                <Button Click="Button_Click_2" Margin="10,0,0,0" Style="{StaticResource BTN_SUCCESS}">
+                    <icons:PackIconMaterial Kind="HelpCircleOutline" Foreground="Black"/>
+                </Button>
             </StackPanel>
             
+            <TextBlock Text="Optionen" Style="{StaticResource UEBERSCHRIFT}"/>
+            <StackPanel Orientation="Horizontal">
+                <mah:ToggleSwitch
+                    x:Name="LOG_DEL_SWITCH"
+                    Margin="25,20,0,0"
+                    OffContent="Log-Datei wird beim Starten nicht geleert"
+                    OnContent="Einträge der Log-Datei werden beim Starten entfernt"
+                    Toggled="ToggleSwitch_Toggled" ToolTip="Erfordert Client-Neustart!" />
+            </StackPanel>
+
+
+            <StackPanel Orientation="Horizontal" ToolTip="Erfordert Client-Neustart!">
+                <mah:ToggleSwitch
+                    x:Name="CLIENT_TOPMOST"
+                    Margin="25,0,0,0"
+                    OffContent="Client ist im Vordergrund"
+                    OnContent="Client in den Hintergrund"
+                    Toggled="CLIENT_TOPMOST_Toggled" />
+            </StackPanel>
             
         </StackPanel>
        

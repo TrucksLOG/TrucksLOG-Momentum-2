@@ -9,6 +9,7 @@ using System.Media;
 using NLog;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
+using System.Diagnostics;
 
 namespace TrucksLOG.View
 {
@@ -49,18 +50,19 @@ namespace TrucksLOG.View
             {
                 NO_STEAM_STACK.Visibility = Visibility.Visible;
             }
+
+
         }
 
 
 
         private void Telemetry_Data(SCSTelemetry data, bool updated)
         {
-            if (!updated)
-                return;
+  
             try
             {
                 #region SYSTEM
-                TruckDaten.GAME_AKTIV = data.SdkActive;
+                TruckDaten.GAME_AKTIV = !data.SdkActive;
                 TruckDaten.GAME_PAUSED = data.Paused;
                 TruckDaten.SPIEL = data.Game.ToString();
                 TruckDaten.TRUCK_RPM_TEXT = data.Game.ToString() == "Ets2" ? TruckDaten.RPM + " U/PM" : TruckDaten.RPM + " RPM";
@@ -69,6 +71,8 @@ namespace TrucksLOG.View
                 TruckDaten.EURO_DOLLAR = TruckDaten.SPIEL == "Ets2" ? " €" : " $";
                 TruckDaten.TO_LB = TruckDaten.SPIEL == "Ets2" ? " T " : " lb ";
                 TruckDaten.LITER_GALLONEN = TruckDaten.SPIEL == "Ets2" ? " L" : " Gal.";
+
+  
                 #endregion
 
                 #region TRUCK DATEN
@@ -308,8 +312,45 @@ namespace TrucksLOG.View
             this.Content = new Login();
         }
 
-       
+
+        private void Image_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            try
+            {
+                ProcessStartInfo startInfo = new(MyIni.Read("ETS_PATH", " GAMES"))
+                {
+                    Arguments = MyIni.Read("ETS_ARGUMENTS", " GAMES")
+                };
+                Process.Start(startInfo);
+            }
+            catch (Exception Er_ETS2)
+            {
+                MainWindow.Logger.Error(" Fehler in STARTE_ETS_SINGLE: " + Er_ETS2.Message + Er_ETS2.Source);
+            }
+        }
+
+        private void Image_MouseDown_1(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            try
+            {
+                if(MyIni.KeyExists("ATS_PATH", "GAMES"))
+                {
+                    ProcessStartInfo startInfo = new(MyIni.Read("ATS_PATH", " GAMES"))
+                    {
+                        Arguments = MyIni.Read("ATS_ARGUMENTS", " GAMES")
+                    };
+                    Process.Start(startInfo);
+                } else
+                {
+                    MessageBox.Show("Kein ATS-Pfad angegeben!", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch (Exception Er_ETS2)
+            {
+                MainWindow.Logger.Error(" Fehler in STARTE_ETS_SINGLE: " + Er_ETS2.Message + Er_ETS2.Source);
+            }
+        }
     }
-    
+
 
 }

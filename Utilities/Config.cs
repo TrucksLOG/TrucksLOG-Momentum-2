@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Diagnostics.Metrics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Threading;
 using System.Windows;
@@ -67,11 +69,18 @@ namespace TrucksLOG.Utilities
             return anz;
 
         }
-        
 
         public static ulong TIMESTAMP()
         {
            return (ulong)(DateTime.Now.Subtract(new DateTime(1970, 1, 1)).TotalSeconds);
+        }
+
+        public static Image GetImageFromURL(string url)
+        {
+            HttpWebRequest httpWebRequest = (HttpWebRequest)HttpWebRequest.Create(url);
+            HttpWebResponse httpWebReponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            Stream stream = httpWebReponse.GetResponseStream();
+            return Image.FromStream(stream);
         }
     }
 }

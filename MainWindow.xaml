@@ -20,7 +20,6 @@
         Background="Transparent"
         ResizeMode="CanResizeWithGrip"
         Loaded="Window_Loaded"
-        Topmost="True"
         >
 
     <Window.DataContext>
@@ -138,6 +137,16 @@
                     <Button Style="{StaticResource ICONS_ROTATE_35 }" Margin="100,-25,0,0" BorderThickness="0" Background="Transparent" HorizontalAlignment="Left" Command="{Binding ImpressumCommand}">
                         <icons:PackIconPicolIcons Kind="Paragraph" Width="25" Height="25"/>
                     </Button>
+
+                    <Button Command="{Binding CustomersCommand}" Width="60" Height="60" Margin="140,-50,0,0" Padding="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Background="Transparent">
+                        <Border CornerRadius="100" Width="50" Height="50">
+                            <Border.Background>
+                                <ImageBrush Stretch="Fill" x:Name="IMG_PROFILE"/>
+                            </Border.Background>
+                        </Border>
+                    </Button>
+                    
+               
 
                 </StackPanel>
 

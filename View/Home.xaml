@@ -10,8 +10,11 @@
              d:DesignHeight="600"
              d:DesignWidth="622">
 
-
-    <Grid>
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="GAME_AKTIV" />
+    </UserControl.Resources>
+    
+    <Grid Name="DB_GRID">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="25*"/>
             <ColumnDefinition Width="25*"/>
@@ -33,7 +36,22 @@
         </Grid.RowDefinitions>
 
 
-        <StackPanel x:Name="NO_STEAM_STACK" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="10" Visibility="Collapsed" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Canvas x:Name="WAITING_SCREEN_FRAME" MinHeight="{Binding ActualHeight, ElementName=DB_GRID}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="20" Grid.ColumnSpan="20" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Panel.ZIndex="1000">
+            <StackPanel Orientation="Horizontal" Canvas.Bottom="150" Canvas.Left="50">
+                <Image Source="/Images/ETS2_LOGO.png" Width="200" Height="150" Panel.ZIndex="999" MouseDown="Image_MouseDown"/>
+                <Image Source="/Images/ATS_LOGO.png" Width="200" Height="150" Panel.ZIndex="999" MouseDown="Image_MouseDown_1" Margin="0,0,0,-100"/>
+
+            </StackPanel>
+            <Canvas.Background>
+                <ImageBrush ImageSource="/Images/WAITING_1.jpg" Stretch="UniformToFill" TileMode="None" AlignmentX="Left"/>
+            </Canvas.Background>
+
+          
+              
+         </Canvas>
+      
+
+        <StackPanel x:Name="NO_STEAM_STACK" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="10" Visibility="Collapsed" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="998">
             <TextBlock Text="Keine Steam-ID gefunden!" Foreground="YellowGreen" FontSize="24"/>
             <Button Click="Button_Click" Style="{StaticResource BTN_SUCCESS}" Margin="0,20,0,0">
                 <StackPanel Orientation="Horizontal">
@@ -44,8 +62,10 @@
         </StackPanel>
 
 
-        <Grid Grid.Row="0" Grid.Column="2" Grid.RowSpan="5" HorizontalAlignment="Center" Background="#212529" Margin="0,10,0,0">
-            <icons:PackIconMaterial Kind="Fuel" Width="40" Height="30" Foreground="Red" Margin="55,0,0,10" VerticalAlignment="Bottom" Panel.ZIndex="110"/>
+
+
+        <Grid x:Name="DASHBOARD" Grid.Row="0" Grid.Column="2" Grid.RowSpan="5" HorizontalAlignment="Center" Background="#212529" Margin="0,10,0,0" Panel.ZIndex="110">
+            <icons:PackIconMaterial Kind="Fuel" Width="40" Height="30" Foreground="Red" Margin="55,0,0,10" VerticalAlignment="Bottom"/>
             <Image Source="/Images/RPM_LEFT.png" Panel.ZIndex="100" Margin="-1"/>
             <TextBlock Text="FUEL" Panel.ZIndex="101" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="30" RenderTransformOrigin="0.5,0.5" Foreground="YellowGreen" >
                 <TextBlock.LayoutTransform>

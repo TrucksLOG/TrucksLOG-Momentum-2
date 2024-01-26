@@ -12,7 +12,7 @@
     <ApplicationIcon>1-52_icon-icons.com_60425.ico</ApplicationIcon>
     <UserSecretsId>d90a6896-776b-41aa-84d7-2da787ec224d</UserSecretsId>
     <Copyright>Blasius Thomas</Copyright>
-    <Version>1.0.1.1</Version>
+    <Version>1.0.1.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -110,9 +110,9 @@
     <Resource Include="Images\WAITING_1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\scs-telemetry.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    <Content Include="Assets\scs-telemetry.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="1-52_icon-icons.com_60425.ico" />
     <Content Include="Images\img_customer.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -18,12 +18,12 @@ namespace TrucksLOG.View
     /// </summary>
     public partial class Home : UserControl
     {
-        public static SCSSdkTelemetry Telemetry;
+        private static SCSSdkTelemetry Telemetry;
 
         public bool InvokeRequired { get; private set; }
         private readonly TruckDaten TruckDaten = new();
-        public static readonly IniFile MyIni = new IniFile(@"Settings.ini");
-        public static readonly IniFile TourIni = new IniFile(@"TOUR_DATA.ini");
+        public static readonly IniFile MyIni = new(@"Settings.ini");
+        public static readonly IniFile TourIni = new(@"TOUR_DATA.ini");
 
         public Home()
         {
@@ -244,7 +244,7 @@ namespace TrucksLOG.View
 
         private void TelemetryOnJobStarted(object sender, EventArgs e) {
 
-            JobData job = new JobData()
+            JobData job = new()
             {
                 STARTORT = TruckDaten.STARTORT,
                 STARTFIRMA = TruckDaten.STARTFIRMA,

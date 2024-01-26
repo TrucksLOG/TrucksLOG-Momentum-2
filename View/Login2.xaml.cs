@@ -7,6 +7,8 @@ using TrucksLOG.ViewModel;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using GameFinder.Common;
+using System.IO;
 
 namespace TrucksLOG.View
 {
@@ -16,7 +18,7 @@ namespace TrucksLOG.View
     public partial class Login2 : UserControl
     {
 
-        public static readonly IniFile MyIni = new IniFile(@"Settings.ini");
+        public static readonly IniFile MyIni = new(@"Settings.ini");
 
         public Login2()
         {
@@ -38,14 +40,13 @@ namespace TrucksLOG.View
                 CHECK_ICON.Visibility = Visibility.Collapsed;
             }
 
-
-
         }
 
         public static string SearchETS_Path()
         {
+
             var handler = new SteamHandler(FileSystem.Shared, OperatingSystem.IsWindows() ? WindowsRegistry.Shared : null);
-            var steamGame = handler.FindOneGameById(GameFinder.StoreHandlers.Steam.Models.ValueTypes.AppId.From(227300), out var errors);
+            var steamGame = handler.FindOneGameById(GameFinder.StoreHandlers.Steam.Models.ValueTypes.AppId.From(227300), out _);
             if (steamGame != null)
             {
                 return steamGame.Path.ToString() + @"\bin\win_x64\eurotrucks2.exe";
@@ -68,7 +69,7 @@ namespace TrucksLOG.View
 
             OpenFileDialog ats = new()
             {
-                Filter = "American Truck Simulator (.exe)|amtrucks.exe|All Files (*.*)|*.*",
+                Filter = "Euro Truck Simulator 2 (.exe)|eurotrucks2.exe|All Files (*.*)|*.*",
                 InitialDirectory = Initial_Dir
             };
 
@@ -83,22 +84,43 @@ namespace TrucksLOG.View
             this.Content = new Login();
         }
 
-        private void Button_Click_1(object sender, System.Windows.RoutedEventArgs e)
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             if(inp_ets_path != null) {
+
+                INSERT_TELEMETRY(inp_ets_path.Text);
                 MyIni.Write("ETS_PATH", inp_ets_path.Text, "GAMES");
-
-
 
                 this.Content = new Login3();
             } else
             {
-                MyIni.Write("ETS_PATH", "", "GAMES");
                 INFO_STACK.Visibility = Visibility.Visible;
                 LBL_INFO.Content = "Der Pfad zu Euro Truck Simulator 2 wird benötigt!";
                 return;
             }
            
+        }
+
+        private static bool INSERT_TELEMETRY(string PATH)
+        {
+            try
+            {
+                if (Directory.Exists(PATH + @"\bin\win_x64\plugins\"))
+                {
+                    File.Copy(@"Assets/scs-telemetry.dll", PATH + @"\bin\win_x64\plugins\scs-telemetry.dll", true);
+                }
+                else
+                {
+                    Directory.CreateDirectory(PATH + @"\bin\win_x64\plugins\");
+                    File.Copy("Assets/scs-telemetry.dll", PATH + @"\bin\win_x64\plugins\scs-telemetry.dll", true);
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MainWindow.Logger.Error(ex.Message);
+                return false;
+            }
         }
     }
 }

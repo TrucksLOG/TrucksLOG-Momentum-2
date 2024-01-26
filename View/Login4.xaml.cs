@@ -9,7 +9,7 @@ namespace TrucksLOG.View
     public partial class Login4 : UserControl
     {
 
-        public static readonly IniFile MyIni = new IniFile(@"Settings.ini");
+        public static readonly IniFile MyIni = new(@"Settings.ini");
         public Login4()
         {
             InitializeComponent();

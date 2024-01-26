@@ -38,32 +38,5 @@ namespace TrucksLOG.Utilities
 
         }
 
-
-        private void Checke_Telemetry_ETS(string ETS_PATH)
-        {
-            try
-            {
-                if (ProcessHelper.IsRunning("eurotrucks2.exe"))
-                {
-                    MainWindow.Logger.Warn("Telemetry nicht kopiert weil ETS2 läuft...");
-                }
-                else
-                {
-                    if (File.Exists(ETS_PATH))
-                    {
-                        var Ordner_ETS = ETS_PATH;
-                        var Ordner2 = Ordner_ETS.Substring(0, Ordner_ETS.Length - 15);
-                        if (!Directory.Exists(Ordner2 + @"plugins"))
-                            Directory.CreateDirectory(Ordner2 + @"plugins");
-
-                        File.Copy(@"Resources\scs-telemetry.dll", Ordner2 + "plugins\\scs-telemetry.dll", true);
-                    }
-                }
-            }
-            catch
-            {
-                MainWindow.Logger.Info("Telemetry ETS was not copied because the game is running");
-            }
-        }
     }
 }

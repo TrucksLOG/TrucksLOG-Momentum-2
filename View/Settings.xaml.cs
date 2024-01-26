@@ -13,7 +13,7 @@ namespace TrucksLOG.View
     /// </summary>
     public partial class Settings : UserControl
     {
-        public static readonly IniFile MyIni = new IniFile(@"Settings.ini");
+        public static readonly IniFile MyIni = new(@"Settings.ini");
 
         public Settings()
         {
@@ -35,7 +35,7 @@ namespace TrucksLOG.View
 
         private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            Action action = () => File.Delete("Settings.ini");
+            static void action() => File.Delete("Settings.ini");
             action();
             Config.RestartApp();
         }
@@ -58,7 +58,7 @@ namespace TrucksLOG.View
 
         private void Button_Click_1(object sender, System.Windows.RoutedEventArgs e)
         {
-            Action action = () =>  Process.Start("notepad.exe", "Settings.ini");
+            static void action() => Process.Start("notepad.exe", "Settings.ini");
             action();
         }
 

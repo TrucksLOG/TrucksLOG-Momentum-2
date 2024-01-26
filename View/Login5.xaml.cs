@@ -7,7 +7,7 @@ namespace TrucksLOG.View
 {
     public partial class Login5 : System.Windows.Controls.UserControl
     {
-        public static readonly IniFile MyIni = new IniFile(@"Settings.ini");
+        public static readonly IniFile MyIni = new(@"Settings.ini");
 
         public Login5()
         {

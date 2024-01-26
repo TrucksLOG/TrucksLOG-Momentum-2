@@ -17,8 +17,8 @@ namespace TrucksLOG.Utilities
     internal class DB
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        public static readonly IniFile MyIni = new IniFile(@"Settings.ini");
-        private static Random random = new Random();
+        public static readonly IniFile MyIni = new(@"Settings.ini");
+        private static readonly Random random = new();
 
         public static string RandomString(int length = 20)
         {

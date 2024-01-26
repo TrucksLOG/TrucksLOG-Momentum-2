@@ -40,7 +40,7 @@
             </StackPanel>
 
 
-            <TextBox x:Name="inp_steam_id" Width="250" FontSize="16" Background="Transparent" Foreground="LightCyan" Style="{StaticResource placeHolder_ETS2}" PreviewTextInput="inp_steam_id_PreviewTextInput"/>
+            <TextBox x:Name="inp_steam_id" Width="250" FontSize="16" Background="Transparent" Foreground="LightCyan" Style="{StaticResource placeHolder_ETS2}" PreviewTextInput="Inp_steam_id_PreviewTextInput"/>
 
 
 

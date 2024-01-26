@@ -11,7 +11,7 @@ namespace TrucksLOG.View
     public partial class Login : UserControl
     {
 
-        public static readonly IniFile MyIni = new IniFile(@"Settings.ini");
+        public static readonly IniFile MyIni = new(@"Settings.ini");
         public static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
 
@@ -73,9 +73,9 @@ namespace TrucksLOG.View
             
         }
 
-        private void inp_steam_id_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        private void Inp_steam_id_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
-            Regex regex = new Regex("[^0-9]+");
+            Regex regex = MyRegex();
             e.Handled = regex.IsMatch(e.Text);
         }
 
@@ -94,5 +94,8 @@ namespace TrucksLOG.View
         {
            Config.GOTO_URL("https://pixabay.com/de/users/allclear55-1703624/");
         }
+
+        [GeneratedRegex("[^0-9]+")]
+        private static partial Regex MyRegex();
     }
 }

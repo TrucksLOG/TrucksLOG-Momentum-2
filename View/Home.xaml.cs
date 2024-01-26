@@ -51,7 +51,7 @@ namespace TrucksLOG.View
                 NO_STEAM_STACK.Visibility = Visibility.Visible;
             }
 
-
+            HOME_ATS_IMG.Visibility = MyIni.KeyExists("ATS_PATH", "GAME") ? Visibility.Visible : Visibility.Collapsed;
         }
 
 

@@ -111,19 +111,17 @@ namespace TrucksLOG
             
             if (MyIni.KeyExists("STEAM_ID", "USER"))
             {
-
-
+                Logger.Info("Update Client Result: " + Update.CLIENT_UPDATE());
+                DB.LOAD_USERDATA(ulong.Parse(MyIni.Read("STEAM_ID", "USER")));
+                Navigation_Panel.Visibility = Visibility.Visible;
+                Image_Panel.Visibility = Visibility.Collapsed;
+                SteamHelper.GET_PLAYER_AVATAR();
                 BitmapImage bitmap = new BitmapImage();
                 bitmap.BeginInit();
                 bitmap.UriSource = new Uri(MyIni.Read("PROFILBILD", "USER"), UriKind.Absolute);
                 bitmap.EndInit();
 
                 IMG_PROFILE.ImageSource = bitmap;
-
-                Logger.Info("Update Client Result: " + Update.CLIENT_UPDATE());
-                DB.LOAD_USERDATA(ulong.Parse(MyIni.Read("STEAM_ID", "USER")));
-                Navigation_Panel.Visibility = Visibility.Visible;
-                Image_Panel.Visibility = Visibility.Collapsed;
 
             } else
             {

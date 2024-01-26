@@ -36,10 +36,10 @@
         </Grid.RowDefinitions>
 
 
-        <Canvas x:Name="WAITING_SCREEN_FRAME" MinHeight="{Binding ActualHeight, ElementName=DB_GRID}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="20" Grid.ColumnSpan="20" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Panel.ZIndex="1000">
+        <Canvas x:Name="WAITING_SCREEN_FRAME" MinHeight="{Binding ActualHeight, ElementName=DB_GRID}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="20" Grid.ColumnSpan="20" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Panel.ZIndex="1000" Visibility="{Binding Path=GAME_AKTIV, Converter={StaticResource GAME_AKTIV}}">
             <StackPanel Orientation="Horizontal" Canvas.Bottom="150" Canvas.Left="50">
                 <Image Source="/Images/ETS2_LOGO.png" Width="200" Height="150" Panel.ZIndex="999" MouseDown="Image_MouseDown"/>
-                <Image Source="/Images/ATS_LOGO.png" Width="200" Height="150" Panel.ZIndex="999" MouseDown="Image_MouseDown_1" Margin="0,0,0,-100"/>
+                <Image x:Name="HOME_ATS_IMG" Source="/Images/ATS_LOGO.png" Width="200" Height="150" Panel.ZIndex="999" MouseDown="Image_MouseDown_1" Margin="0,0,0,-100"/>
 
             </StackPanel>
             <Canvas.Background>

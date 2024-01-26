@@ -12,7 +12,7 @@
     <ApplicationIcon>1-52_icon-icons.com_60425.ico</ApplicationIcon>
     <UserSecretsId>d90a6896-776b-41aa-84d7-2da787ec224d</UserSecretsId>
     <Copyright>Blasius Thomas</Copyright>
-    <Version>1.0.1.0</Version>
+    <Version>1.0.1.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,9 +21,12 @@
     <None Remove="Fonts\NIKODECS.OTF" />
     <None Remove="Fonts\Rubik-Medium.ttf" />
     <None Remove="Fonts\Rubik-Regular.ttf" />
+    <None Remove="Images\ATS_BACK_1.jpg" />
     <None Remove="Images\ATS_LOGO.png" />
     <None Remove="Images\Client_Back_1.jpg" />
+    <None Remove="Images\cropped-1440-900-693889.jpg" />
     <None Remove="Images\Entwurf_02.3.1.png" />
+    <None Remove="Images\ETS2_BACK_1.jpg" />
     <None Remove="Images\ETS2_LOGO.png" />
     <None Remove="Images\Icon.ico" />
     <None Remove="Images\icons8-einstellungen-50.png" />
@@ -39,10 +42,13 @@
     <None Remove="Images\schrift1.png" />
     <None Remove="Images\shutdown_def.png" />
     <None Remove="Images\shutdown_mo.png" />
+    <None Remove="Images\technology-7656067_1280.jpg" />
+    <None Remove="Images\TMP_BACK_1.jpg" />
     <None Remove="Images\TMP_LOGO.png" />
     <None Remove="Images\truck_set.jpg" />
     <None Remove="Images\WAITING_1.jpg" />
     <None Remove="Resources\scs-telemetry.dll" />
+    <None Remove="View\cyberpunk_-_95476-_540p_.mpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -56,6 +62,9 @@
     <Resource Include="Fonts\Rubik-Regular.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\ATS_BACK_1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\ATS_LOGO.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -64,6 +73,9 @@
     </Resource>
     <Resource Include="Images\Entwurf_02.3.1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\ETS2_BACK_1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\ETS2_LOGO.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -82,6 +94,12 @@
     </Resource>
     <Resource Include="Images\schrift1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\technology-7656067_1280.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\TMP_BACK_1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\TMP_LOGO.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -123,6 +141,12 @@
     <Content Include="Images\shutdown_mo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\cropped-1440-900-693889.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

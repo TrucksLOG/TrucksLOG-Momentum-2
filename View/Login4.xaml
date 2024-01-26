@@ -10,6 +10,9 @@
             d:DesignHeight="600"
             d:DesignWidth="622"
             Style="{StaticResource Page_Style}">
+    <UserControl.Background>
+        <ImageBrush ImageSource="/Images/TMP_BACK_1.jpg" Stretch="UniformToFill" AlignmentX="Left"/>
+    </UserControl.Background>
 
     <UserControl.DataContext>
         <vm:NavigationVM />
@@ -18,21 +21,16 @@
     
     <Grid Margin="10">
 
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,40,0,0">
-            <TextBlock FontFamily="{StaticResource NICO}" Foreground="Aqua" FontSize="38" Text=" Spielst du Online über" HorizontalAlignment="Center"/>
-         
-        </StackPanel>
 
-        <StackPanel HorizontalAlignment="Center" Margin="0,90,0, 0">
+        <StackPanel HorizontalAlignment="Center" Margin="0,190,0, 0">
             
-                <Image Source="/Images/TMP_LOGO.png" Width="250" />
-
+            
             <StackPanel Orientation="Horizontal">
                 <icons:PackIconForkAwesome Kind="Check" Width="35" Height="35" x:Name="CHECK_ICON" Foreground="LightGray" HorizontalAlignment="Left" Margin="0,5,10,0"/>
-                <Label x:Name="LBL_INFO" FontSize="20" Foreground="OrangeRed" FontFamily="{StaticResource NICO}" HorizontalAlignment="Center" Margin="0,20,0,0"/>
+                <Label x:Name="LBL_INFO" FontSize="20" Foreground="NavajoWhite" FontFamily="{StaticResource NICO}" HorizontalAlignment="Center" Margin="0,20,0,0"/>
             </StackPanel>
 
-            <Label x:Name="LBL_TMP_PFAD" Content="Pfad zu TruckersMP:" FontSize="12" Foreground="{StaticResource TextBrush_Yellow}" FontFamily="{StaticResource NICO}"/>
+            <Label x:Name="LBL_TMP_PFAD" Content="Pfad zu TruckersMP angeben:" FontSize="16" Foreground="{StaticResource TextBrush_Yellow}" FontFamily="{StaticResource NICO}"/>
             
             <StackPanel Orientation="Horizontal">
                     <TextBox x:Name="inp_tmp_path" Width="555" Style="{StaticResource placeHolder_ETS2}"/>

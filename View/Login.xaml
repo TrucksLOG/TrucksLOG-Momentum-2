@@ -11,7 +11,9 @@
             d:DesignHeight="400"
             d:DesignWidth="622"
             Style="{StaticResource Page_Style}">
-
+    <UserControl.Background>
+        <ImageBrush ImageSource="/Images/cropped-1440-900-693889.jpg" Stretch="UniformToFill" Opacity=".3"/>
+    </UserControl.Background>
 
     <UserControl.DataContext>
         <vm:NavigationVM/>
@@ -20,12 +22,12 @@
 
 
     <Grid Margin="10,50,0,0">
-        
+
         <StackPanel Orientation="Vertical">
-           
-            <TextBlock Text="Willkommen bei" HorizontalAlignment="Center" FontSize="44" FontFamily="{StaticResource NICO}" Foreground="Beige" Margin="0,10,0,5"/>
-            <Image Source="/Images/Entwurf_02.3.1.png" Width="150"/>
-            <TextBlock Text="Wir beginnen mit der Einrichtung deines Spiel-Client. Als erstes benötigen wir deine STEAM-ID" HorizontalAlignment="Center" FontSize="16" Foreground="Lime" FontFamily="{StaticResource NICO}" Margin="0,0,0,5"/>
+
+            <TextBlock Text="Willkommen bei" HorizontalAlignment="Right" FontSize="44" FontFamily="{StaticResource NICO}" Foreground="Beige" Margin="0,10,30,5"/>
+            <Image Source="/Images/Entwurf_02.3.1.png" Width="150" HorizontalAlignment="Right" Margin="0,0,20,0"/>
+            <TextBlock Text="Wir beginnen mit der Einrichtung deines Spiel-Client. Als erstes benötigen wir deine STEAM-ID" HorizontalAlignment="Center" FontSize="16" Foreground="Lime" FontFamily="{StaticResource NICO}" Margin="0,100,0,5"/>
             <TextBlock Text="Falls du deine Steam-ID nicht kennen solltest, klicke auf den Info-Button um zur Hilfeseite zu gelangen." HorizontalAlignment="Center" FontSize="16" Foreground="Lime" FontFamily="{StaticResource NICO}" Margin="0,10,0,5"/>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
@@ -34,7 +36,7 @@
                 <Button Click="Button_Click_1" Background="Transparent" BorderThickness="0" Margin="10,6,0,0">
                     <icons:PackIconBootstrapIcons Kind="InfoCircle" Foreground="White"/>
                 </Button>
-        
+
             </StackPanel>
 
 
@@ -47,7 +49,7 @@
                     <icons:FontAwesome Kind="ArrowAltCircleRightSolid" Width="30" Height="30"/>
                 </Button>
             </StackPanel>
-            
+
         </StackPanel>
 
 
@@ -56,8 +58,8 @@
                 <icons:PackIconBootstrapIcons Kind="Link" Foreground="Orange" Margin="10,0,10,0"/>
                 <TextBlock Text="Bild von AllClear55 auf Pixabay" Foreground="WhiteSmoke" MouseDown="TextBlock_MouseDown"/>
             </StackPanel>
-           
+
         </StackPanel>
     </Grid>
-    
+
 </UserControl>

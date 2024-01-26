@@ -10,6 +10,9 @@
             d:DesignHeight="600"
             d:DesignWidth="622"
             Style="{StaticResource Page_Style}">
+    <UserControl.Background>
+        <ImageBrush Stretch="UniformToFill" ImageSource="/Images/technology-7656067_1280.jpg"/>
+    </UserControl.Background>
 
     <UserControl.DataContext>
         <vm:NavigationVM />

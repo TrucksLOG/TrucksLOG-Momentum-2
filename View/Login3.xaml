@@ -10,6 +10,9 @@
             d:DesignHeight="600"
             d:DesignWidth="622"
             Style="{StaticResource Page_Style}">
+    <UserControl.Background>
+        <ImageBrush Stretch="UniformToFill" ImageSource="/Images/ATS_BACK_1.jpg" AlignmentX="Left"/>
+    </UserControl.Background>
 
     <UserControl.DataContext>
         <vm:NavigationVM/>
@@ -18,20 +21,16 @@
     
     <Grid Margin="10">
 
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,40,0,0">
-            <TextBlock FontFamily="{StaticResource NICO}" Foreground="Aqua" FontSize="38" Text=" Hast du auch" HorizontalAlignment="Center"/>
-         
-        </StackPanel>
+ 
 
-        <StackPanel HorizontalAlignment="Center" Margin="0,90,0, 0">
+        <StackPanel HorizontalAlignment="Center" Margin="0,190,0, 0">
             
-                <Image Source="/Images/ATS_LOGO.png" Width="250" />
-
-                <Label x:Name="LBL_INFO" FontSize="20" Foreground="OrangeRed" FontFamily="{StaticResource NICO}" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+    
+                <Label x:Name="LBL_INFO" FontSize="20" Foreground="Black" FontFamily="{StaticResource NICO}" HorizontalAlignment="Left" Margin="0,10,0,0"/>
             
             <StackPanel Orientation="Horizontal">
                 <icons:PackIconForkAwesome Kind="Check" Width="35" Height="35" x:Name="CHECK_ICON" Foreground="LightGray" HorizontalAlignment="Left" Margin="0,5,10,0"/>
-                <Label x:Name="LBL_ATS_PFAD" Content="Pfad zu American Truck Simulator:" FontSize="12" Foreground="Lime" FontFamily="{StaticResource NICO}"/>
+                <Label x:Name="LBL_ATS_PFAD" Content="Pfad zu American Truck Simulator:" FontSize="20" Foreground="Black" FontFamily="{StaticResource NICO}"/>
             </StackPanel>
             
             <StackPanel Orientation="Horizontal">

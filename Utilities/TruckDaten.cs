@@ -105,7 +105,7 @@ namespace TrucksLOG.Utilities
             private uint rest_km;
             private float rest_km_float;
             private string spiel;
-            private int job_gef_strecke;
+            private uint job_gef_strecke;
             private float frachtschaden;
             private float frachtschaden_dashboard;
             private float lkwschaden_dashboard;
@@ -1665,7 +1665,7 @@ namespace TrucksLOG.Utilities
                 }
             }
 
-            public int JOB_GEF_STRECKE
+            public uint JOB_GEF_STRECKE
             {
                 get => job_gef_strecke;
                 set
@@ -2083,15 +2083,5 @@ namespace TrucksLOG.Utilities
             {
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
-
-            private void SetProperty<T>(ref T field, T newValue, [CallerMemberName] string propertyName = null)
-            {
-                if (!Equals(field, newValue))
-                {
-                    field = newValue;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-                }
-            }
-        
     }
 }

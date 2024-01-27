@@ -10,6 +10,8 @@ using NLog;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Diagnostics;
+using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace TrucksLOG.View
 {
@@ -23,7 +25,7 @@ namespace TrucksLOG.View
         public bool InvokeRequired { get; private set; }
         private readonly TruckDaten TruckDaten = new();
         public static readonly IniFile MyIni = new(@"Settings.ini");
-        public static readonly IniFile TourIni = new(@"TOUR_DATA.ini");
+        private static StatusHelper.Tour_Status STATUS { get; set; }
 
         public Home()
         {
@@ -144,13 +146,14 @@ namespace TrucksLOG.View
                 TruckDaten.REST_KM_FLOAT = (float)(TruckDaten.SPIEL == "Ets2" ? data.NavigationValues.NavigationDistance / 1000 : (data.NavigationValues.NavigationDistance / 1.609 / 1000));
                 TruckDaten.FRACHTMARKT = data.JobValues.Market.ToString();
                 TruckDaten.EINKOMMEN = data.JobValues.Income;
-                TruckDaten.JOB_GEF_STRECKE = (int)(TruckDaten.TRAILER_ANGEHANGEN ? TruckDaten.STRECKE - TruckDaten.REST_KM : 0);
+                TruckDaten.JOB_GEF_STRECKE = (uint)(TruckDaten.TRAILER_ANGEHANGEN ? TruckDaten.STRECKE - TruckDaten.REST_KM : 0);
                 TruckDaten.KM_PREIS = (float)Math.Round((TruckDaten.EINKOMMEN - 600) / (float)TruckDaten.STRECKE, 2);
                 TruckDaten.GEWICHT = TruckDaten.SPIEL == "Ets2" ? (int)(data.JobValues.CargoValues.Mass / 1000) : (int)(data.JobValues.CargoValues.Mass * 2.20461);
                 TruckDaten.EARNED_XP = data.GamePlay.JobDelivered.EarnedXp;
                 TruckDaten.EINNAHMEN = data.GamePlay.JobDelivered.Revenue;
                 TruckDaten.AUTOLOADING = data.GamePlay.JobDelivered.AutoLoaded;
                 TruckDaten.AUTOPARKING = data.GamePlay.JobDelivered.AutoParked;
+                
                 #endregion
 
                 #region SCHÄDEN TRUCK / TRAILER
@@ -222,28 +225,16 @@ namespace TrucksLOG.View
             }
         }
 
-        private void TelemetryFerry(object sender, EventArgs e) {
 
-            if (TruckDaten.GAME_PAUSED)
-                return;
-        }
+ 
 
-        private void TelemetryFined(object sender, EventArgs e) {
-
-            if (TruckDaten.GAME_PAUSED)
-                return;
-        }
-
-        private void TelemetryJobCancelled(object sender, EventArgs e) {
-        }
-
-        private void TelemetryJobDelivered(object sender, EventArgs e) {
-
-
-        }
-
-        private void TelemetryOnJobStarted(object sender, EventArgs e) {
-
+        private void TelemetryOnJobStarted(object sender, EventArgs e)
+        {
+            if (STATUS == StatusHelper.Tour_Status.OnTour)
+            {
+                STATUS = StatusHelper.Tour_Status.Unknown;
+            }
+  
             JobData job = new()
             {
                 STARTORT = TruckDaten.STARTORT,
@@ -264,17 +255,61 @@ namespace TrucksLOG.View
                 LKW_LICENSE_COUNTRY_ID = TruckDaten.LKW_LICENSE_COUNTRY_ID,
                 SPIEL = TruckDaten.SPIEL
             };
-            var check = DB.CHECK_TOUR(job.STARTORT, job.STARTFIRMA, job.ZIELORT, job.ZIELFIRMA, job.LADUNG, job.GEWICHT);
-            if (check == "FALSE")
+
+            if (REG.CHECK_TOUR() == false)
             {
+                REG.Delete_Key();
                 DB.TOUR_INSERT(job);
-
-
-            } else
+                TruckDaten.TOUR_ID = REG.Read("TOUR_ID");
+                STATUS = StatusHelper.Tour_Status.OnTour;
+            }
+            else
             {
-                MessageBox.Show("Tour ist schon vorhanden!");
+                MainWindow.Logger.Warn("Tour-ID in Delivery: " + REG.Read("TOUR_ID") + ". Tour was Canceled!");
+                DB.CANCEL_TOUR();
+                REG.Delete_Key();
+                DB.TOUR_INSERT(job);
+                TruckDaten.TOUR_ID = REG.Read("TOUR_ID");
+                STATUS = StatusHelper.Tour_Status.OnTour;
+                return;
             }
 
+        }
+        private void TelemetryJobDelivered(object sender, EventArgs e) {
+
+            JobData jobend = new()
+            {
+                FRACHTSCHADEN = TruckDaten.FRACHTSCHADEN,
+                EINNAHMEN = TruckDaten.EINNAHMEN,
+                JOB_GEF_STRECKE = TruckDaten.JOB_GEF_STRECKE,
+                REST_STRECKE = TruckDaten.REST_KM,
+                ODO_ENDE = TruckDaten.KILOMETERSTAND
+            };
+
+            var ende = DB.TOUR_END(jobend);
+            MainWindow.Logger.Debug("TOUR_END DEBUG: " + ende);
+            STATUS = StatusHelper.Tour_Status.Completed;
+        }
+
+        private void TelemetryJobCancelled(object sender, EventArgs e)
+        {
+
+            
+         
+        }
+
+        private void TelemetryFerry(object sender, EventArgs e)
+        {
+
+            if (TruckDaten.GAME_PAUSED)
+                return;
+        }
+
+        private void TelemetryFined(object sender, EventArgs e)
+        {
+
+            if (TruckDaten.GAME_PAUSED)
+                return;
         }
 
         private void TelemetryRefuel(object sender, EventArgs e) {
@@ -307,25 +342,21 @@ namespace TrucksLOG.View
                 return;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.Content = new Login();
-        }
 
 
         private void Image_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             try
             {
-                ProcessStartInfo startInfo = new(MyIni.Read("ETS_PATH", " GAMES"))
+                ProcessStartInfo startInfo = new(MyIni.Read("ETS_PATH", "GAMES"))
                 {
-                    Arguments = MyIni.Read("ETS_ARGUMENTS", " GAMES")
+                    Arguments = MyIni.Read("ETS_ARGUMENTS", "GAMES")
                 };
                 Process.Start(startInfo);
             }
             catch (Exception Er_ETS2)
             {
-                MainWindow.Logger.Error(" Fehler in STARTE_ETS_SINGLE: " + Er_ETS2.Message + Er_ETS2.Source);
+                MainWindow.Logger.Error("Fehler in STARTE_ETS_SINGLE: " + Er_ETS2.Message + Er_ETS2.Source);
             }
         }
 
@@ -335,9 +366,9 @@ namespace TrucksLOG.View
             {
                 if(MyIni.KeyExists("ATS_PATH", "GAMES"))
                 {
-                    ProcessStartInfo startInfo = new(MyIni.Read("ATS_PATH", " GAMES"))
+                    ProcessStartInfo startInfo = new(MyIni.Read("ATS_PATH", "GAMES"))
                     {
-                        Arguments = MyIni.Read("ATS_ARGUMENTS", " GAMES")
+                        Arguments = MyIni.Read("ATS_ARGUMENTS", "GAMES")
                     };
                     Process.Start(startInfo);
                 } else
@@ -345,10 +376,15 @@ namespace TrucksLOG.View
                     MessageBox.Show("Kein ATS-Pfad angegeben!", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            catch (Exception Er_ETS2)
+            catch (Exception Er_ATS2)
             {
-                MainWindow.Logger.Error(" Fehler in STARTE_ETS_SINGLE: " + Er_ETS2.Message + Er_ETS2.Source);
+                MainWindow.Logger.Error("Fehler in STARTE_ATS_SINGLE: " + Er_ATS2.Message + Er_ATS2.Source);
             }
+        }
+
+        private void Kein_Steam_ID_Click(object sender, RoutedEventArgs e)
+        {
+            this.Content = new Login();
         }
     }
 

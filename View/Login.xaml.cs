@@ -1,6 +1,7 @@
 ﻿using NLog;
 using SteamUserInfo;
 using System;
+using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,25 +26,29 @@ namespace TrucksLOG.View
 
         public async void SearchSTEAM_ID()
         {
-
-            ISteamUserLoader loader = new SteamUserDefaultLoader();
-            if (await loader.IsSteamInstalledAsync())
+            try
             {
-                var allUsers = await loader.LoadUsersAsync();
-                var activeUser = await loader.LoadActiveUserAsync();
-                long userid = 0;
-
-                foreach (var user in allUsers)
+                ISteamUserLoader loader = new SteamUserDefaultLoader();
+                if (await loader.IsSteamInstalledAsync())
                 {
-                    bool isActive = activeUser == user;
-                    userid = user.Id64;
+                    var allUsers = await loader.LoadUsersAsync();
+                    var activeUser = await loader.LoadActiveUserAsync();
+                    long userid = 0;
+
+                    foreach (var user in allUsers)
+                    {
+                        bool isActive = activeUser == user;
+                        userid = user.Id64;
+                    }
+                    inp_steam_id.Text = userid.ToString();
                 }
-                inp_steam_id.Text = userid.ToString();
-            } else
+                else
+                {
+                    inp_steam_id.Text = "";
+                }
+            } catch (Exception ex)
             {
-                MessageBox.Show("Keine STEAM-Installation gefunden!\n\nOhne STEAM kannst du unsere Software nicht nutzen.", "STEAM-Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
-                Environment.Exit(0);
-                inp_steam_id.Text = "";
+                Logger.Error("Error at ISteamUserLoader: " + ex.Message + ex.StackTrace);
             }
 
         }

@@ -53,7 +53,7 @@
 
         <StackPanel x:Name="NO_STEAM_STACK" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="10" Visibility="Collapsed" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="998">
             <TextBlock Text="Keine Steam-ID gefunden!" Foreground="YellowGreen" FontSize="24"/>
-            <Button Click="Button_Click" Style="{StaticResource BTN_SUCCESS}" Margin="0,20,0,0">
+            <Button Name="Kein_Steam_ID" Click="Kein_Steam_ID_Click" Style="{StaticResource BTN_SUCCESS}" Margin="0,20,0,0">
                 <StackPanel Orientation="Horizontal">
                     <icons:PackIconMaterial Kind="LockReset"/>
                     <TextBlock Text="Setup neu Starten!" Margin="10,0,0,0"/>
@@ -199,6 +199,19 @@
                     <TextBlock Text="Ladung: " Margin="0,0,0,0" Foreground="YellowGreen" FontSize="20" FontFamily="{StaticResource NICO}" VerticalAlignment="Center"/>
                     <TextBlock Text="{Binding LADUNG}" Margin="0,0,10,0" Foreground="YellowGreen" FontSize="20" FontFamily="{StaticResource NICO}" VerticalAlignment="Center"/>
                 </StackPanel>
+
+                
+            </Border>
+        </Grid>
+
+        <Grid Grid.Row="8" Grid.Column="3" Grid.ColumnSpan="1" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Center">
+            <Border BorderBrush="YellowGreen" BorderThickness="1" CornerRadius="10" Padding="5">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <icons:PackIconMaterial Kind="Counter" Foreground="White" Width="30" Height="30" Margin="0,0,10,0"/>
+                    <TextBlock Text="TOUR-ID: " Margin="0,0,0,0" Foreground="YellowGreen" FontSize="20" FontFamily="{StaticResource NICO}" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding TOUR_ID}" Margin="0,0,10,0" Foreground="YellowGreen" FontSize="20" FontFamily="{StaticResource NICO}" VerticalAlignment="Center"/>
+                </StackPanel>
+
 
             </Border>
         </Grid>

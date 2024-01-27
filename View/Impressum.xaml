@@ -37,24 +37,56 @@
                         <TextBlock Text="Zur Webseite" FontFamily="{StaticResource NICO}" FontSize="24" Margin="10,0,0,0"/>
                     </StackPanel>
                 </Button>
+                
                 <Separator/>
-                <TextBlock Text="Used Fonts:" Foreground="WhiteSmoke"/>
+                
+                <TextBlock Style="{StaticResource UEBERSCHRIFT}" Text="Used Fonts:" Foreground="WhiteSmoke"/>
                 <StackPanel Orientation="Horizontal">
                     <icons:PackIconBootstrapIcons Kind="Link" Foreground="Lightblue" Margin="5,0,5,10"/>
-                    <TextBlock Text="GOOD TIMES @ 1001FreeFonts.com" Foreground="Orange" MouseDown="TextBlock_MouseDown"/>
+                        <TextBlock Text="GOOD TIMES @ 1001FreeFonts.com" Foreground="Orange" MouseDown="TextBlock_MouseDown" Cursor="Hand"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <icons:PackIconBootstrapIcons Kind="Link" Foreground="Lightblue" Margin="5,0,5,10"/>
-                    <TextBlock Text="NicoDecs @ DaFont.com" Foreground="Orange" MouseDown="TextBlock_MouseDown_1"/>
+                        <TextBlock Text="NicoDecs @ DaFont.com" Foreground="Orange" MouseDown="TextBlock_MouseDown_1" Cursor="Hand"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <icons:PackIconBootstrapIcons Kind="Link" Foreground="Lightblue" Margin="5,0,5,10"/>
-                    <TextBlock Text="Rubik Medium/Regular @ 1001FreeFonts.com" Foreground="Orange" MouseDown="TextBlock_MouseDown_2"/>
+                        <TextBlock Text="Rubik Medium/Regular @ 1001FreeFonts.com" Foreground="Orange" MouseDown="TextBlock_MouseDown_2" Cursor="Hand"/>
                 </StackPanel>
+                
+                    <Separator/>
+                    <TextBlock Style="{StaticResource UEBERSCHRIFT}" Text="Bildnachweis:" Foreground="WhiteSmoke"/>
+                
+                    <StackPanel Orientation="Horizontal">
+                        <icons:PackIconBootstrapIcons Kind="Link" Foreground="Lightblue" Margin="5,0,5,10"/>
+                        <TextBlock Text="Setup-Bild links unten AllClear@PixaBay.com" Foreground="Orange" x:Name="AllClear" MouseDown="AllClear_MouseDown" Cursor="Hand"/>
+                    </StackPanel>
 
-                <TextBlock TextWrapping="Wrap" Foreground="White" Margin="0,0,0,20">
+                    <StackPanel Orientation="Horizontal">
+                        <icons:PackIconBootstrapIcons Kind="Link" Foreground="Lightblue" Margin="5,0,5,10"/>
+                        <TextBlock Text="Background Dashboard, ETS2 Setup, ATS Setup from Andreas Hurricane@Truckslog.de" Foreground="Orange" x:Name="AHurricane" MouseDown="AHurricane_MouseDown" Cursor="Hand"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <icons:PackIconBootstrapIcons Kind="Link" Foreground="Lightblue" Margin="5,0,5,10"/>
+                        <TextBlock Text="All Icons from MahhApps Icons" Foreground="Orange" x:Name="MahApps_ICONS" MouseDown="MahApps_ICONS_MouseDown" Cursor="Hand"/>
+                    </StackPanel>
+                
+                    <StackPanel Orientation="Horizontal">
+                        <icons:PackIconBootstrapIcons Kind="Link" Foreground="Lightblue" Margin="5,0,5,10"/>
+                        <TextBlock Text="Setup Picture STEAM MrROBERTOX@wall.alphacoders.com" Foreground="Orange" x:Name="SETUP_STEAM_PIC" MouseDown="SETUP_STEAM_PIC_MouseDown" Cursor="Hand"/>
+                    </StackPanel>
+                
+                    <StackPanel Orientation="Horizontal">
+                        <icons:PackIconBootstrapIcons Kind="Link" Foreground="Lightblue" Margin="5,0,5,10"/>
+                        <TextBlock Text="Setup Picture Config ThomasWolter@PixaBay.com" Foreground="Orange" x:Name="SETUP_CONFIG_PIC" MouseDown="SETUP_CONFIG_PIC_MouseDown" Cursor="Hand"/>
+                    </StackPanel>
+                
+                    <Separator/>
+                    <TextBlock Style="{StaticResource UEBERSCHRIFT}" Text="Disclaimer:" Foreground="WhiteSmoke"/>
+                    <TextBlock TextWrapping="Wrap" Foreground="White" Margin="0,0,0,20">
                     
-                    Disclaimer – rechtliche Hinweise <LineBreak/><LineBreak/>
+                    Rechtliche Hinweise <LineBreak/><LineBreak/>
                     § 1 Warnhinweis zu Inhalten<LineBreak/>
                     Die kostenlosen und frei zugänglichen Inhalte dieser Webseite wurden mit größtmöglicher Sorgfalt erstellt. Der Anbieter dieser Webseite übernimmt jedoch keine Gewähr für die Richtigkeit und Aktualität der bereitgestellten kostenlosen und frei zugänglichen journalistischen Ratgeber und Nachrichten. Namentlich gekennzeichnete Beiträge geben die Meinung des jeweiligen Autors und nicht immer die Meinung des Anbieters wieder. Allein durch den Aufruf der kostenlosen und frei zugänglichen Inhalte kommt keinerlei Vertragsverhältnis zwischen dem Nutzer und dem Anbieter zustande, insoweit fehlt es am Rechtsbindungswillen des Anbieters.
                     <LineBreak/><LineBreak/>

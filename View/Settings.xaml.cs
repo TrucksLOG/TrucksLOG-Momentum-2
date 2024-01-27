@@ -1,5 +1,6 @@
 ﻿using ControlzEx.Standard;
 using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -47,8 +48,7 @@ namespace TrucksLOG.View
 
         private void ToggleSwitch_Toggled(object sender, System.Windows.RoutedEventArgs e)
         {
-            ToggleSwitch toggleSwitch = sender as ToggleSwitch;
-            if (toggleSwitch != null)
+            if (sender is ToggleSwitch toggleSwitch)
             {
                 if (toggleSwitch.IsOn == true)
                 {
@@ -69,8 +69,7 @@ namespace TrucksLOG.View
 
         private void CLIENT_TOPMOST_Toggled(object sender, System.Windows.RoutedEventArgs e)
         {
-            ToggleSwitch toggleSwitch = sender as ToggleSwitch;
-            if (toggleSwitch != null)
+            if (sender is ToggleSwitch toggleSwitch)
             {
                 if (toggleSwitch.IsOn == true)
                 {
@@ -112,24 +111,42 @@ namespace TrucksLOG.View
                 TargetUser = BootMeUp.TargetUsers.CurrentUser
             };
 
-            ToggleSwitch toggleSwitch = sender as ToggleSwitch;
-            if (toggleSwitch != null)
+            if (sender is ToggleSwitch toggleSwitch)
             {
                 if (toggleSwitch.IsOn == true)
                 {
                     MyIni.Write("AUTORUN", "1", "SETTINGS");
                     bootMeUp.Enabled = true;
-                    if (bootMeUp.Successful)
-                        MessageBox.Show("TrucksLOG wird jetzt mit Windows gestartet.");
                 }
                 else
                 {
                     MyIni.Write("AUTORUN", "0", "SETTINGS");
                     bootMeUp.Enabled = false;
-                    if (!bootMeUp.Successful)
-                        MessageBox.Show("TrucksLOG wurde aus dem Autostarte entfernt.");
+ 
                 }
             }
+        }
+
+
+        private async void SHOW_INFO_TOPMOST_Click(object sender, RoutedEventArgs e)
+        {
+            var metroWindow = (Application.Current.MainWindow as MetroWindow);
+            await metroWindow.ShowMessageAsync("Information", "Bei dieser Option kannst du Einstellen, ob der Client immer im Vordergrund bleibt oder nicht. Wenn der Switch aktiviert ist, bleibt der Client, egal was du machst, immer im Vordergrund. Hilfreich wenn man nur einen Monitor hat, aber den Client immer sehen möchte.");
+
+        }
+
+        private async void SHOW_INFO_LOG_Click(object sender, RoutedEventArgs e)
+        {
+            var metroWindow = (Application.Current.MainWindow as MetroWindow);
+            await metroWindow.ShowMessageAsync("Information", "Hier kannst du Auswählen, ob beim Starten die Log-Datei geleert wird. Wenn der Switch aktiviert ist, wird jedes mal beim Client Start zuerst die Log Datei geleert bevor der Client gestartet wird, andernfalls wird bis zum nächsten Tag alles nacheinander in die Log-Datei geschrieben. Dies ist beim Testen äusserst Hilfreich.");
+
+        }
+
+        private async void SHOW_INFO_AUTORUN_Click(object sender, RoutedEventArgs e)
+        {
+            var metroWindow = (Application.Current.MainWindow as MetroWindow);
+            await metroWindow.ShowMessageAsync("Information", "Bei dieser Option kannst du Einstellen, ob der Client zusammen mit dem Betriebssystem gestartet wird. Damit musst du den Client beim Rechner start nicht nochmal extra einschalten.");
+
         }
     }
 }

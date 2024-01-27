@@ -31,6 +31,31 @@ namespace TrucksLOG.View
         {
             Config.GOTO_URL("https://www.1001freefonts.com/de/rubik.font");
         }
+
+        private void AllClear_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Config.GOTO_URL("https://pixabay.com/de/users/allclear55-1703624/");
+        }
+
+        private void AHurricane_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Config.GOTO_URL("https://steamcommunity.com/profiles/76561197993488680");
+        }
+
+        private void MahApps_ICONS_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Config.GOTO_URL("https://github.com/MahApps/MahApps.Metro.IconPacks");
+        }
+
+        private void SETUP_STEAM_PIC_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Config.GOTO_URL("https://alphacoders.com/users/profile/95419/MrROBERTOX");
+        }
+
+        private void SETUP_CONFIG_PIC_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Config.GOTO_URL("https://pixabay.com/de/users/thomaswolter-92511/");
+        }
     }
      
 }

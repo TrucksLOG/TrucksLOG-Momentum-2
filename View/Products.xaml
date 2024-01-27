@@ -15,20 +15,7 @@
     
     <Grid Margin="15">
 
-        <Border CornerRadius="0,20,20,0">
-            <Border.Background>
-                <ImageBrush ImageSource="/Images/product_page.png"
-                            Stretch="None" />
-            </Border.Background>
-        </Border>
-
-        <TextBlock Text="{Binding ProductAvailability}"
-                   Foreground="#F25E68"
-                   FontSize="12"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Center"
-                   FontFamily="/Fonts/#Rubik Medium"
-                   Margin="261,300,0,0" />
+            
 
     </Grid>
 </UserControl>

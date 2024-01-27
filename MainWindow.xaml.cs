@@ -1,6 +1,7 @@
 ﻿using AutoUpdaterDotNET;
 using DiscordRPC;
 using DiscordRPC.Logging;
+using MahApps.Metro.Controls;
 using NLog;
 using System;
 using System.Drawing;
@@ -20,7 +21,7 @@ using TrucksLOG.ViewModel;
 
 namespace TrucksLOG
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         public DiscordRpcClient client;
         public static readonly IniFile MyIni = new(@"Settings.ini");
@@ -131,6 +132,36 @@ namespace TrucksLOG
                 Navigation_Panel.Visibility = Visibility.Collapsed;
                 Image_Panel.Visibility= Visibility.Visible;
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Config.GOTO_URL("https://github.com/TrucksLOG/TrucksLOG-Momentum-2");
+        }
+        private void FACEBOOK_BTN_Click_1(object sender, RoutedEventArgs e)
+        {
+            Config.GOTO_URL("https://www.facebook.com/groups/truckslog");
+        }
+        private void TWITCH_BTN_Click(object sender, RoutedEventArgs e)
+        {
+            Config.GOTO_URL("https://www.twitch.tv/truckslog");
+        }
+        private void WEBSITE_BTN_Click(object sender, RoutedEventArgs e)
+        {
+            Config.GOTO_URL("https://www.truckslog.de");
+        }
+        private void DISCORD_LNK_Click(object sender, RoutedEventArgs e)
+        {
+            Config.GOTO_URL("https://discord.gg/VQtPGS9H5B");
+        }
+        private void YOUTUBE_LNK_Click(object sender, RoutedEventArgs e)
+        {
+            Config.GOTO_URL("https://www.youtube.com/@truckslogThommy");
+        }
+
+        private void MetroWindow_Closed(object sender, EventArgs e)
+        {
+           
         }
 
     }

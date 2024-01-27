@@ -58,31 +58,43 @@
             </StackPanel>
             
             <TextBlock Text="Optionen" Style="{StaticResource UEBERSCHRIFT}"/>
+  
             <StackPanel Orientation="Horizontal">
+                <Button Style="{StaticResource BTN_BACK}" Width="20" Height="20" Margin="20,0,-10,7" x:Name="SHOW_INFO_LOG" Click="SHOW_INFO_LOG_Click">
+                    <icons:PackIconBootstrapIcons Kind="InfoCircle" Foreground="YellowGreen"/>
+                </Button>
                 <mah:ToggleSwitch
                     x:Name="LOG_DEL_SWITCH"
-                    Margin="25,20,0,0"
+                    Margin="25,0,0,0"
                     OffContent="Log-Datei wird beim Starten nicht geleert"
                     OnContent="Einträge der Log-Datei werden beim Starten entfernt"
                     Toggled="ToggleSwitch_Toggled" ToolTip="Erfordert Client-Neustart!" />
+      
+            
             </StackPanel>
 
 
             <StackPanel Orientation="Horizontal" ToolTip="Erfordert Client-Neustart!">
+                <Button Style="{StaticResource BTN_BACK}" Width="20" Height="20" Margin="20,0,-10,7" x:Name="SHOW_INFO_TOPMOST" Click="SHOW_INFO_TOPMOST_Click">
+                    <icons:PackIconBootstrapIcons Kind="InfoCircle" Foreground="YellowGreen"/>
+                </Button>
                 <mah:ToggleSwitch
                     x:Name="CLIENT_TOPMOST"
                     Margin="25,0,0,0"
-                    OffContent="Client ist im Vordergrund"
-                    OnContent="Client in den Hintergrund"
+                    OffContent="Client bleibt im Hintergrund"
+                    OnContent="Client ist immer im Vordergrund (TopMost)"
                     Toggled="CLIENT_TOPMOST_Toggled" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
+                <Button Style="{StaticResource BTN_BACK}" Width="20" Height="20" Margin="20,0,-10,7" x:Name="SHOW_INFO_AUTORUN" Click="SHOW_INFO_AUTORUN_Click">
+                    <icons:PackIconBootstrapIcons Kind="InfoCircle" Foreground="YellowGreen"/>
+                </Button>
                 <mah:ToggleSwitch
                     x:Name="CLIENT_AUTORUN"
                     Margin="25,0,0,0"
-                    OffContent="Client nicht mit Windows starten"
-                    OnContent="Client wird mit Windows gestartet"
+                    OffContent="Client wird nicht mit Windows gestartet"
+                    OnContent="Client wird zusammen mit Windows gestartet"
                     Toggled="CLIENT_AUTORUN_Toggled" />
             </StackPanel>
 

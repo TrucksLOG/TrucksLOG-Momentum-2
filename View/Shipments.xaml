@@ -15,9 +15,11 @@
     
     <Grid Margin="15">
 
-        <Border CornerRadius="0,20,20,0">
+        <TextBlock Text="Touren" Style="{StaticResource UEBERSCHRIFT}"/>
 
-        </Border>
+        <StackPanel Orientation="Vertical" Margin="0,50,0,0">
+            <TextBlock Text="In Arbeit..." FontFamily="{StaticResource NICO}" FontSize="18" Foreground="YellowGreen"/>
+        </StackPanel>
 
     </Grid>
 </UserControl>

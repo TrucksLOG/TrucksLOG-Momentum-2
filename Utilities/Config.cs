@@ -1,6 +1,8 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Net.Http;
 using System.Reflection;
@@ -11,7 +13,6 @@ namespace TrucksLOG.Utilities
     public class Config
     {
         public static string LogRoot { get; internal set; }
-        static readonly string Datum = DateTime.Now.Day + "-" + DateTime.Now.Month + "-" + DateTime.Now.Year;
         public static readonly string REST_PULL_USER = "https://support.truckslog.de/REST/USERDATEN/index.php";
         public static string GET_USERDATA_URL = "https://api.truckslog.de/MOMENTUM/REST/USERDATEN/GetUserData.php";
 
@@ -45,11 +46,13 @@ namespace TrucksLOG.Utilities
 
         internal static void RestartApp()
         {
-            ProcessStartInfo Info = new ProcessStartInfo();
-            Info.Arguments = "/C choice /C Y /N /D Y /T 1 & START \"\" \"" + Assembly.GetEntryAssembly().Location + "\"";
-            Info.WindowStyle = ProcessWindowStyle.Hidden;
-            Info.CreateNoWindow = true;
-            Info.FileName = "TrucksLOG Momentum.exe";
+            ProcessStartInfo Info = new()
+            {
+                Arguments = "/C choice /C Y /N /D Y /T 1 & START \"\" \"" + Assembly.GetEntryAssembly().Location + "\"",
+                WindowStyle = ProcessWindowStyle.Hidden,
+                CreateNoWindow = true,
+                FileName = "TrucksLOG Momentum.exe"
+            };
             Process.Start(Info);
             Process.GetCurrentProcess().Kill();
         }
@@ -72,9 +75,22 @@ namespace TrucksLOG.Utilities
            return (ulong)(DateTime.Now.Subtract(new DateTime(1970, 1, 1)).TotalSeconds);
         }
 
-        public void GetImageFromURL(string url)
+
+        public static string Timestamp2DateTime(double unixTimeStamp)
         {
-           
+            DateTime dtDateTime = new(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            try
+            {
+                dtDateTime = dtDateTime.AddSeconds(unixTimeStamp);
+                return dtDateTime.ToString("dd.MM.yyyy H:mm");
+
+            }
+            catch (Exception ex)
+            {
+                MainWindow.Logger.Error("Fehler in Timestamp2Datetime " + ex.Message + ex.Source);
+                return "";
+            }
         }
+
     }
 }

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="clr-namespace:TrucksLOG.ViewModel"
+             xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:local="clr-namespace:TrucksLOG.View"
              mc:Ignorable="d"
              d:Width="600"
@@ -18,6 +19,120 @@
 
     <Grid Margin="10">
         <TextBlock Text="Profil" FontSize="24" Foreground="LightYellow"/>
+        <Grid Margin="0,50,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="190"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="100*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                
+            </Grid.RowDefinitions>
+
+            
+            
+            <!-- NICKNAME -->
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">
+                <TextBlock  Text="Nickname:" FontSize="18" FontFamily="{StaticResource NICO}" Style="{StaticResource Text_Style}" Margin="10,0,5,0"/>
+            </StackPanel>
+            <TextBlock Grid.Row="0" Grid.Column="1" x:Name="NICKNAME" FontSize="18" FontFamily="{StaticResource NICO}" Style="{StaticResource Text_Style_Settings_LEFT}"/>
+
+            
+            <!-- STEAMID -->
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right">
+                <TextBlock  Text="STEAM-ID:" FontSize="18" FontFamily="{StaticResource NICO}" Style="{StaticResource Text_Style}" Margin="10,0,5,0"/>
+            </StackPanel>
+            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="STEAMID" FontSize="18" FontFamily="{StaticResource NICO}" Style="{StaticResource Text_Style_Settings_LEFT}"/>
+
+            <!-- SPEDITION -->
+            <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right">
+                <TextBlock  Text="Spedition:" FontSize="18" FontFamily="{StaticResource NICO}" Style="{StaticResource Text_Style}" Margin="10,0,5,0"/>
+            </StackPanel>
+            <TextBlock Grid.Row="2" Grid.Column="1" x:Name="SPEDITION" FontSize="18" FontFamily="{StaticResource NICO}" Style="{StaticResource Text_Style_Settings_LEFT}"/>
+
+            <!-- RANG -->
+            <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right">
+                <TextBlock  Text="Rang:" FontSize="18" FontFamily="{StaticResource NICO}" Style="{StaticResource Text_Style}" Margin="10,0,5,0"/>
+            </StackPanel>
+            <TextBlock Grid.Row="3" Grid.Column="1" x:Name="RANG" FontSize="18" FontFamily="{StaticResource NICO}" Style="{StaticResource Text_Style_Settings_LEFT}"/>
+
+            <!-- FREIGABE -->
+            <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right">
+                <TextBlock  Text="Freigabe:" FontSize="18" FontFamily="{StaticResource NICO}" Style="{StaticResource Text_Style}" Margin="10,0,5,0"/>
+            </StackPanel>
+            <TextBlock Grid.Row="4" Grid.Column="1" x:Name="FREIGABE_TXT" FontSize="18" FontFamily="{StaticResource NICO}" Style="{StaticResource Text_Style_Settings_LEFT}"/>
+            
+            <!-- SPONSOR -->
+            <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right">
+                <TextBlock  Text="Sponsor:" FontSize="18" FontFamily="{StaticResource NICO}" Style="{StaticResource Text_Style}" Margin="10,0,5,0"/>
+            </StackPanel>
+            <TextBlock Grid.Row="5" Grid.Column="1" x:Name="SPONSOR" FontSize="18" FontFamily="{StaticResource NICO}" Style="{StaticResource Text_Style_Settings_LEFT}"/>
+
+            <!-- REM -->
+            <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Right">
+                <TextBlock  Text="REM:" FontSize="18" FontFamily="{StaticResource NICO}" Style="{StaticResource Text_Style}" Margin="10,0,5,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.Column="1">
+                <icons:PackIconModern Kind="TreeLeaf" Width="20" Height="20" VerticalAlignment="Center" x:Name="REM_ICO" Margin="10,0,0,0"/>
+                <TextBlock  x:Name="REM_TEXT" FontSize="18" FontFamily="{StaticResource NICO}" Style="{StaticResource Text_Style_Settings_LEFT}"/>
+
+            </StackPanel>
+
+            <!-- BETA-TESTER -->
+            <StackPanel Orientation="Horizontal" Grid.Row="7" Grid.Column="0" HorizontalAlignment="Right">
+                <TextBlock  Text="Beta-Tester:" FontSize="18" FontFamily="{StaticResource NICO}" Style="{StaticResource Text_Style}" Margin="10,0,5,0"/>
+            </StackPanel>
+
+            <TextBlock  Grid.Row="7" Grid.Column="1" x:Name="BETA_TXT" FontSize="18" FontFamily="{StaticResource NICO}" Style="{StaticResource Text_Style_Settings_LEFT}"/>
+           
+            <!-- CLIENT_KEY -->
+            <StackPanel Orientation="Horizontal" Grid.Row="8" Grid.Column="0" HorizontalAlignment="Right">
+                <TextBlock  Text="Client-Key:" FontSize="18" FontFamily="{StaticResource NICO}" Style="{StaticResource Text_Style}" Margin="10,0,5,0"/>
+            </StackPanel>
+
+            <TextBlock  Grid.Row="8" Grid.Column="1" x:Name="CK_TEXT" FontSize="18" FontFamily="{StaticResource NICO}" Style="{StaticResource Text_Style_Settings_LEFT}"/>
+
+             <!-- CLIENT_KEY -->
+            <StackPanel Orientation="Horizontal" Grid.Row="9" Grid.Column="0" HorizontalAlignment="Right">
+                <TextBlock  Text="Accounterstellung:" FontSize="18" FontFamily="{StaticResource NICO}" Style="{StaticResource Text_Style}" Margin="10,0,5,0"/>
+            </StackPanel>
+
+            <TextBlock  Grid.Row="9" Grid.Column="1" x:Name="ACC_DATUM" FontSize="18" FontFamily="{StaticResource NICO}" Style="{StaticResource Text_Style_Settings_LEFT}"/>
+
+            <!--  TMP_ID -->
+            <StackPanel Orientation="Horizontal" Grid.Row="10" Grid.Column="0" HorizontalAlignment="Right">
+                <TextBlock  Text="TruckersMP-ID:" FontSize="18" FontFamily="{StaticResource NICO}" Style="{StaticResource Text_Style}" Margin="10,0,5,0"/>
+            </StackPanel>
+
+            <TextBlock  Grid.Row="10" Grid.Column="1" x:Name="TMP_TXT" FontSize="18" FontFamily="{StaticResource NICO}" Style="{StaticResource Text_Style_Settings_LEFT}"/>
+
+
+
+
+            <!-- PROFILBILD -->
+
+            <Border CornerRadius="100" Width="150" Height="150" Grid.Row="0" Grid.Column="3" Grid.RowSpan="8" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,50,0">
+                <Border.Background>
+                    <ImageBrush Stretch="Fill" x:Name="IMG_PROFILE"/>
+                </Border.Background>
+            </Border>
+            
+        </Grid>
+       
+      
     </Grid>
 
 

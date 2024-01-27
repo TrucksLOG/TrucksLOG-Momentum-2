@@ -6,7 +6,7 @@ namespace TrucksLOG.ViewModel
 {
     class NavigationVM : ViewModelBase
     {
-        public static readonly IniFile MyIni = new IniFile(@"Settings.ini");
+        public static readonly IniFile MyIni = new(@"Settings.ini");
 
         private object _currentView;
         public object CurrentView

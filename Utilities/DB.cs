@@ -32,7 +32,7 @@ namespace TrucksLOG.Utilities
         {
             try
             {
-                var client = new RestClient(@"https://api.truckslog.de/MOMENTUM/REST/USERDATEN/GetUserData.php");
+                var client = new RestClient(Config.GET_USERDATA_URL);
                 client.AddDefaultQueryParameter("STEAM", STEAM_ID.ToString());
                 var response = client.Execute(new RestRequest(), Method.Post);
                 if(String.IsNullOrEmpty(response.Content))
@@ -42,14 +42,17 @@ namespace TrucksLOG.Utilities
 
                 var json = JsonConvert.DeserializeObject<Userdaten>(response.Content);
                 MyIni.Write("STEAM_ID", STEAM_ID.ToString(), "USER");
-                MyIni.Write("NICKNAME", json.nickname, "USER");
-                MyIni.Write("SPEDITION", json.in_spedition, "USER");
-                MyIni.Write("RANG", json.rang.ToString(), "USER");
-                MyIni.Write("PATREON", json.patreon.ToString(), "USER");
-                MyIni.Write("FREIGABE", json.freigabe.ToString(), "USER");
-                MyIni.Write("PROFILBILD", json.profilbild, "USER");
+                MyIni.Write("NICKNAME", json.Nickname, "USER");
+                MyIni.Write("SPEDITION", json.In_spedition, "USER");
+                MyIni.Write("RANG", json.Rang.ToString(), "USER");
+                MyIni.Write("PATREON", json.Patreon.ToString(), "USER");
+                MyIni.Write("FREIGABE", json.Freigabe.ToString(), "USER");
+                MyIni.Write("PROFILBILD", json.Profilbild, "USER");
                 MyIni.Write("REM", json.REM.ToString(), "USER");
-                MyIni.Write("BETA_TESTER", json.beta_tester.ToString(), "USER");
+                MyIni.Write("BETA_TESTER", json.Beta_tester.ToString(), "USER");
+                MyIni.Write("CLIENT_KEY", json.Client_key.ToString(), "USER");
+                MyIni.Write("CREATED", json.Created.ToString(), "USER");
+                MyIni.Write("TMP_ID", json.Truckers_mp.ToString(), "USER");
                 return "OK";
 
             }

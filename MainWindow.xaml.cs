@@ -23,7 +23,7 @@ namespace TrucksLOG
     public partial class MainWindow : Window
     {
         public DiscordRpcClient client;
-        public static readonly IniFile MyIni = new IniFile(@"Settings.ini");
+        public static readonly IniFile MyIni = new(@"Settings.ini");
         public static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         
 
@@ -119,7 +119,7 @@ namespace TrucksLOG
                 Navigation_Panel.Visibility = Visibility.Visible;
                 Image_Panel.Visibility = Visibility.Collapsed;
                 SteamHelper.GET_PLAYER_AVATAR();
-                BitmapImage bitmap = new BitmapImage();
+                BitmapImage bitmap = new();
                 bitmap.BeginInit();
                 bitmap.UriSource = new Uri(MyIni.Read("PROFILBILD", "USER"), UriKind.Absolute);
                 bitmap.EndInit();

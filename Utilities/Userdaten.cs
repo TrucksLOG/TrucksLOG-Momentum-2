@@ -4,16 +4,18 @@ namespace TrucksLOG.Utilities
 {
     public class Userdaten
     {
-        public string nickname { get; set; }
-        public string email { get; set; }
-        public string in_spedition { get; set; }
-        public int freigabe { get; set; }
-        public string client_key { get; set; }
-        public string profilbild { get; set; }
+        public string Nickname { get; set; }
+        public string Email { get; set; }
+        public string In_spedition { get; set; }
+        public int Freigabe { get; set; }
+        public string Client_key { get; set; }
+        public string Profilbild { get; set; }
         public int REM { get; set; }
-        public int rang { get; set; }
-        public int patreon { get; set; }
-        public int beta_tester { get; set; }
+        public int Rang { get; set; }
+        public int Patreon { get; set; }
+        public int Beta_tester { get; set; }
+        public int Created { get; set; }
+        public int Truckers_mp { get; set; }
 
     }
 }

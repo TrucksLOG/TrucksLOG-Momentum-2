@@ -1,5 +1,7 @@
-﻿using NLog;
+﻿using Microsoft.Extensions.Configuration;
+using NLog;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
@@ -14,11 +16,10 @@ namespace TrucksLOG.Utilities
     {
         public static string LogRoot { get; internal set; }
         public static readonly string REST_PULL_USER = "https://support.truckslog.de/REST/USERDATEN/index.php";
-        public static string GET_USERDATA_URL = "https://api.truckslog.de/MOMENTUM/REST/USERDATEN/GetUserData.php";
+        public static readonly string GET_USERDATA_URL = "https://api.truckslog.de/MOMENTUM/REST/USERDATEN/GetUserData.php";
 
 
-
-            internal static string APP_Version()
+        internal static string APP_Version()
         {
             return Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }

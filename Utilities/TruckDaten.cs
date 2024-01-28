@@ -88,7 +88,7 @@ namespace TrucksLOG.Utilities
             private string frachtmarkt;
             private float gewicht;
             private ulong einkommen;
-            private string tour_id;
+            private uint tour_id;
             private string startort;
             private string startort_id;
             private string startfirma;
@@ -1925,7 +1925,7 @@ namespace TrucksLOG.Utilities
                 }
             }
 
-            public string TOUR_ID
+            public uint TOUR_ID
             {
                 get => tour_id;
                 set

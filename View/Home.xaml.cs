@@ -1,17 +1,14 @@
-﻿using TrucksLOG.Utilities;
+﻿using NLog;
 using SCSSdkClient;
 using SCSSdkClient.Object;
 using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using TrucksLOG.Classes;
-using System.Media;
-using NLog;
-using System.Diagnostics.Eventing.Reader;
-using System.Linq;
-using System.Diagnostics;
-using MahApps.Metro.Controls;
-using MahApps.Metro.Controls.Dialogs;
+using TrucksLOG.Utilities;
 
 namespace TrucksLOG.View
 {
@@ -25,8 +22,7 @@ namespace TrucksLOG.View
         public bool InvokeRequired { get; private set; }
         private readonly TruckDaten TruckDaten = new();
         public static readonly IniFile MyIni = new(@"Settings.ini");
-        private static StatusHelper.Tour_Status STATUS { get; set; }
-
+        private string STATUS { get; set; }
         public Home()
         {
             InitializeComponent();
@@ -60,9 +56,16 @@ namespace TrucksLOG.View
 
         private void Telemetry_Data(SCSTelemetry data, bool updated)
         {
-  
+            if (!updated)
+                return;
             try
             {
+                if (InvokeRequired)
+                {
+                    // ReSharper disable once ConditionIsAlwaysTrueOrFalse
+                    Invoke(new TelemetryData(Telemetry_Data), data, updated);
+                    return;
+                }
                 #region SYSTEM
                 TruckDaten.GAME_AKTIV = !data.SdkActive;
                 TruckDaten.GAME_PAUSED = data.Paused;
@@ -226,22 +229,26 @@ namespace TrucksLOG.View
         }
 
 
- 
+        private static object Invoke(Delegate method, object value, bool updated) => Invoke(method, null, false);
+
 
         private void TelemetryOnJobStarted(object sender, EventArgs e)
         {
-            if (STATUS == StatusHelper.Tour_Status.OnTour)
-            {
-                STATUS = StatusHelper.Tour_Status.Unknown;
-            }
-  
+
+            if(STATUS == "AUF FAHRT") { return; }
+
             JobData job = new()
             {
                 STARTORT = TruckDaten.STARTORT,
+                STARTORT_ID = TruckDaten.STARTORT_ID,
                 STARTFIRMA = TruckDaten.STARTFIRMA,
+                STARTFIRMA_ID = TruckDaten.STARTFIRMA_ID,
                 ZIELORT = TruckDaten.ZIELORT,
+                ZIELORT_ID = TruckDaten.ZIELORT_ID,
                 ZIELFIRMA = TruckDaten.ZIELFIRMA,
+                ZIELFIRMA_ID= TruckDaten.ZIELFIRMA_ID,
                 LADUNG = TruckDaten.LADUNG,
+                LADUNG_ID = TruckDaten.LADUNG_ID,
                 GEWICHT = TruckDaten.GEWICHT,
                 EINKOMMEN = TruckDaten.EINKOMMEN,
                 GESAMT_STRECKE = TruckDaten.STRECKE,
@@ -256,27 +263,24 @@ namespace TrucksLOG.View
                 SPIEL = TruckDaten.SPIEL
             };
 
-            if (REG.CHECK_TOUR() == false)
+            if (MyIni.CHECK_TOUR(job.ZIELORT_ID, job.ZIELFIRMA_ID, job.STARTORT_ID, job.STARTFIRMA_ID, job.LADUNG_ID))
             {
-                REG.Delete_Key();
-                DB.TOUR_INSERT(job);
-                TruckDaten.TOUR_ID = REG.Read("TOUR_ID");
-                STATUS = StatusHelper.Tour_Status.OnTour;
+                // WENN TOUR EXISTIERT!!!
+                TruckDaten.TOUR_ID = uint.Parse(MyIni.Read("TOUR_ID", "AKTUELLE_TOUR"));
             }
             else
             {
-                MainWindow.Logger.Warn("Tour-ID in Delivery: " + REG.Read("TOUR_ID") + ". Tour was Canceled!");
-                DB.CANCEL_TOUR();
-                REG.Delete_Key();
+                // WENN TOUR NICHT EXISTIERT!!!
                 DB.TOUR_INSERT(job);
-                TruckDaten.TOUR_ID = REG.Read("TOUR_ID");
-                STATUS = StatusHelper.Tour_Status.OnTour;
-                return;
+                TruckDaten.TOUR_ID = uint.Parse(MyIni.Read("TOUR_ID", "AKTUELLE_TOUR"));
             }
+            STATUS = "AUF FAHRT";
+
+            Wait(2000);
 
         }
-        private void TelemetryJobDelivered(object sender, EventArgs e) {
-
+        private void TelemetryJobDelivered(object sender, EventArgs e) 
+        {
             JobData jobend = new()
             {
                 FRACHTSCHADEN = TruckDaten.FRACHTSCHADEN,
@@ -286,9 +290,11 @@ namespace TrucksLOG.View
                 ODO_ENDE = TruckDaten.KILOMETERSTAND
             };
 
-            var ende = DB.TOUR_END(jobend);
-            MainWindow.Logger.Debug("TOUR_END DEBUG: " + ende);
-            STATUS = StatusHelper.Tour_Status.Completed;
+            DB.TOUR_END(jobend);
+            STATUS = "ABGESCHLOSSEN";
+            TruckDaten.TOUR_ID = 0;
+            Wait(2000);
+
         }
 
         private void TelemetryJobCancelled(object sender, EventArgs e)
@@ -386,6 +392,19 @@ namespace TrucksLOG.View
         {
             this.Content = new Login();
         }
+
+        private void FINISH_Click(object sender, RoutedEventArgs e)
+        {
+
+            this.TelemetryJobDelivered(null, null);
+
+        }
+
+        public static async void Wait(int milliseconds)
+        {
+            await Task.Delay(milliseconds);
+        }
+
     }
 
 

@@ -1,22 +1,14 @@
-﻿using AutoUpdaterDotNET;
-using DiscordRPC;
+﻿using DiscordRPC;
 using DiscordRPC.Logging;
 using MahApps.Metro.Controls;
 using NLog;
 using System;
-using System.Drawing;
 using System.IO;
-using System.Net;
-using System.Security.Policy;
-using System.Threading;
 using System.Windows;
-using System.Windows.Documents.DocumentStructures;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using TrucksLOG.Utilities;
 using TrucksLOG.View;
-using TrucksLOG.ViewModel;
 
 
 namespace TrucksLOG
@@ -26,8 +18,7 @@ namespace TrucksLOG
         public DiscordRpcClient client;
         public static readonly IniFile MyIni = new(@"Settings.ini");
         public static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        
-
+ 
         public MainWindow()
         {
             InitializeComponent();

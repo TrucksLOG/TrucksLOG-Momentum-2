@@ -108,16 +108,17 @@ namespace TrucksLOG.Utilities
             client.AddDefaultQueryParameter("ODO_START", job.ODO_START.ToString());
             client.AddDefaultQueryParameter("STATUS", "Auf Fahrt");
             client.AddDefaultQueryParameter("EINKOMMEN", job.EINKOMMEN.ToString());
-            var resp = client.Execute(new RestRequest(), Method.Post);
 
-            Logger.Info("STARTING TOUR: " + resp.Content);
-            REG.Write("TOUR_ID", resp.Content.ToString());
-            REG.Write("Starting_City", job.STARTORT);
-            REG.Write("Destination_City", job.ZIELORT);
-            REG.Write("Source_Company", job.STARTFIRMA);
-            REG.Write("Destination_Company", job.ZIELFIRMA);
-            REG.Write("Cargo", job.GEWICHT.ToString());
-            REG.Write("Route", job.GESAMT_STRECKE.ToString());
+            string Request = client.Execute(new RestRequest(), Method.Post).Content;
+            Logger.Info("STARTING TOUR: " + Request);
+
+            MyIni.Write("TOUR_ID", Request, "AKTUELLE_TOUR");
+            MyIni.Write("STARTORT", job.STARTORT_ID, "AKTUELLE_TOUR");
+            MyIni.Write("ZIELORT", job.ZIELORT_ID, "AKTUELLE_TOUR");
+            MyIni.Write("STARTFIRMA", job.STARTFIRMA_ID, "AKTUELLE_TOUR");
+            MyIni.Write("ZIELFIRMA", job.ZIELFIRMA_ID, "AKTUELLE_TOUR");
+            MyIni.Write("LADUNG", job.LADUNG_ID.ToString(), "AKTUELLE_TOUR");
+            MyIni.Write("STRECKE", job.GESAMT_STRECKE.ToString(), "AKTUELLE_TOUR");
            
         }
 
@@ -133,16 +134,19 @@ namespace TrucksLOG.Utilities
             client.AddDefaultQueryParameter("REST_KM", job.REST_STRECKE.ToString());
             client.AddDefaultQueryParameter("ODO_END", job.ODO_ENDE.ToString());
 
-            var resp = client.Execute(new RestRequest(), Method.Post);
-            Logger.Info("Ending TOUR: " + resp.Content);
-            return resp.Content;
+            var resp = client.Execute(new RestRequest(), Method.Post).Content;
+            Logger.Info("TOUR_END Response: " + resp);
+
+            MyIni.DeleteSection("AKTUELLE_TOUR");
+
+            return resp;
         }
 
 
         internal static void CANCEL_TOUR()
         {
             var client = new RestClient(@"https://api.truckslog.de/MOMENTUM/REST/TOUR/Cancel_Tour.php");
-            client.AddDefaultQueryParameter("TOUR_ID", REG.Read("TOUR_ID"));
+            client.AddDefaultQueryParameter("TOUR_ID", MyIni.Read("TOUR_ID", "AKTUELLE_TOUR"));
             client.AddDefaultQueryParameter("STEAM", MyIni.Read("STEAM_ID", "USER").ToString());
 
             var resp = client.Execute(new RestRequest(), Method.Post);

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -48,5 +49,9 @@ namespace TrucksLOG.Utilities
             return Read(Key, Section).Length > 0;
         }
 
+        internal bool CHECK_TOUR(string zIELORT_ID, string zIELFIRMA_ID, string sTARTORT_ID, string sTARTFIRMA_ID, string lADUNG_ID)
+        {
+            return Read("STARTORT", "AKTUELLE_TOUR") == sTARTORT_ID && Read("STARTFIRMA", "AKTUELLE_TOUR") == sTARTFIRMA_ID && Read("ZIELORT", "AKTUELLE_TOUR") == zIELORT_ID && Read("ZIELFIRMA", "AKTUELLE_TOUR") == zIELFIRMA_ID && Read("LADUNG", "AKTUELLE_TOUR") == lADUNG_ID;
+        }
     }
 }

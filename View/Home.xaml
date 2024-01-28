@@ -190,6 +190,7 @@
                     <TextBlock Text="{Binding ZIELORT}" HorizontalAlignment="Center" Foreground="YellowGreen" FontFamily="{StaticResource NICO}" FontSize="16" Margin="0,5,0,0"/>
                 </StackPanel>
             </Border>
+            <Button x:Name="FINISH" Content="Fin" Click="FINISH_Click"/>
         </Grid>
 
         <Grid Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="5" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Center">
@@ -211,8 +212,7 @@
                     <TextBlock Text="TOUR-ID: " Margin="0,0,0,0" Foreground="YellowGreen" FontSize="20" FontFamily="{StaticResource NICO}" VerticalAlignment="Center"/>
                     <TextBlock Text="{Binding TOUR_ID}" Margin="0,0,10,0" Foreground="YellowGreen" FontSize="20" FontFamily="{StaticResource NICO}" VerticalAlignment="Center"/>
                 </StackPanel>
-
-
+              
             </Border>
         </Grid>
 
